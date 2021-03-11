@@ -11,10 +11,15 @@ import SwiftUI
 struct map_shareApp: App {
     let persistenceController = PersistenceController.shared
 
+    init() {
+        
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+//            HomeView(homeVM: HomeViewModel())
+            LoginView(viewModel: LoginViewModel())
+                //.environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
