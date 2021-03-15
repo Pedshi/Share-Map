@@ -127,14 +127,31 @@ extension LoginViewModel {
             urlReq.httpBody = json
             
             return URLSession.shared.dataTaskPublisher(for: urlReq)
-                    .map{ (data, response) -> Int in
-                        guard let httpResponse = response as? HTTPURLResponse else{ return 404 }
-                        return httpResponse.statusCode
+                    .tryMap{ (data, response) in
+                        guard let httpResponse = response as? HTTPURLResponse,
+                              httpResponse.statusCode < 300
+                        else{ throw ReqError.unhandledError }
+                        
+//                        if let cookie = httpResponse.value(forHTTPHeaderField: "Set-Cookie") {
+//                            let token = LoginViewModel.trimCookie(cookie: cookie)
+//                            try? KeyChainItem().saveItem(token: token, account: email.lowercased())
+//                            print("Logged in")
+//                        }
                     }
-                    .map{ $0 == 200 ? Event.onLoginSuccess : Event.onLoginFail(ReqError.unhandledError) }
+                    .map{ Event.onLoginSuccess }
+//                    .map{ $0 == 200 ? Event.onLoginSuccess : Event.onLoginFail(ReqError.unhandledError) }
                     .catch{ Just(Event.onLoginFail($0)) }
                     .eraseToAnyPublisher()
         }
+    }
+    
+    static func trimCookie(cookie: String) -> String{
+        var from = cookie.firstIndex(of: "=")!
+        from = cookie.index(from, offsetBy: 1)
+        var trimmed = cookie.suffix(from: from)
+        let to = trimmed.firstIndex(of: ";")!
+        trimmed = trimmed.prefix(upTo: to)
+        return String(trimmed)
     }
     
     static func userInput(input: AnyPublisher<Event, Never>) -> Feedback<State, Event> {

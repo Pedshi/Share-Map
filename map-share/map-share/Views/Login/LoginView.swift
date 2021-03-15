@@ -10,6 +10,7 @@ import Combine
 
 struct LoginView: View {
     @ObservedObject var viewModel : LoginViewModel
+    @Environment(\.presentationMode) var presentationMode : Binding<PresentationMode>
     
     @State private var userEmail = ""
     @State private var userPassword = ""
@@ -18,14 +19,8 @@ struct LoginView: View {
         VStack{
             content()
         }
-//        VStack{
-//            TextField("Email", text: $userEmail)
-//            SecureField("Password", text: $userPassword)
-//            Button("Login"){
-//                print("Email: \(userEmail), password: \(userPassword)")
-//                loginVM.isTokenValid(email: userEmail, password: userPassword)
-//            }
-//        }.padding()
+        .navigationBarHidden(true)
+        .ignoresSafeArea()
     }
     
     private func content() -> some View{
@@ -39,9 +34,8 @@ struct LoginView: View {
         case .loadingFail:
             return Text("Loading failed").eraseToAnyView()
         case .loggingIn:
-            return LoginForm(goToHomePage: true)
-                    .environmentObject(viewModel)
-                    .eraseToAnyView()
+            self.presentationMode.wrappedValue.dismiss()
+            return EmptyView().eraseToAnyView()
         }
     }
 
@@ -49,29 +43,26 @@ struct LoginView: View {
 
 struct LoginForm: View{
     @EnvironmentObject var viewModel : LoginViewModel
-    
+
     @State var email = ""
     @State var password = ""
     @State var goToHomePage : Bool
     
     var body: some View{
-        NavigationView{
-            ZStack{
-                VStack{
-                    TextField("Email", text: $email)
-                    SecureField("Password", text: $password)
-                    Button("Login"){
-                        viewModel.send(event: .onlogin(email.lowercased(), password))
-                    }
-                }.padding()
-                .background(NavigationLink(
-                                destination: HomeView(viewModel: HomeViewModel()),
-                                isActive: $goToHomePage,
-                                label: {
-                                    Text("")
-                                    
-                                }))
-            }.ignoresSafeArea()
+        ZStack{
+            VStack{
+                TextField("Email", text: $email)
+                SecureField("Password", text: $password)
+                Button("Login"){
+                    viewModel.send(event: .onlogin(email.lowercased(), password))
+                }
+            }.padding()
+//            NavigationLink(
+//                destination: HomeView(viewModel: HomeViewModel(state: .idle)),
+//                isActive: $goToHomePage,
+//                label: {
+//                    Text("")
+//            })
         }
     }
 }

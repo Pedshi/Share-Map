@@ -9,8 +9,126 @@ import Foundation
 import Combine
 
 class HomeViewModel : ObservableObject{
-    @Published private(set) var state = "TO BE SET"
+    @Published private(set) var state : State
     
+    private var bag = Set<AnyCancellable>()
+    
+    private var input = PassthroughSubject<Event, Never>()
+    
+    init(state: State) {
+        self.state = state
+        Publishers.system(
+            initial: state,
+            reduce: Self.reduce,
+            scheduler: RunLoop.main,
+            feedbacks: [
+                Self.whenLoading(),
+                Self.userInput(input: input.eraseToAnyPublisher())
+            ]
+        )
+        .assign(to: \.state, on: self)
+        .store(in: &bag)
+    }
+    
+    
+    deinit {
+        bag.removeAll();
+    }
+    
+    func send(event: Event){
+        input.send(event)
+    }
+    
+}
+
+
+extension HomeViewModel{
+    enum State {
+        case idle
+        case loading
+        case loadingFailed
+        case goToLogin
+    }
+    
+    enum Event {
+        case onLoading
+        case onLoadingSuccess
+        case onLoadingFail(Error)
+    }
+    
+    static func reduce(state: State, event: Event) -> State{
+        print("In : HomeViewModel")
+        print("current State : \(state)")
+        print("current Event : \(event)")
+        print("-------------------------------------")
+        switch state {
+        case .idle:
+            return reduceIdle(state: state, event: event)
+        case .loading:
+            return reduceLoading(state: state, event: event)
+        case .loadingFailed:
+            return reduceLoadingFailed(state: state, event: event)
+        case .goToLogin:
+            return state
+        }
+    }
+    
+    static func reduceIdle(state: State, event: Event) -> State{
+        return state
+    }
+    
+    static func reduceLoading(state: State, event: Event) -> State{
+        switch event {
+        case .onLoadingSuccess:
+            return .idle
+        case .onLoadingFail:
+            return .loadingFailed
+        default:
+            return state
+        }
+    }
+    
+    enum ReqError: Error {
+        case noItemFound
+        case unexpectedItemData
+        case unhandledError
+    }
+    
+    static func reduceLoadingFailed(state: State, event: Event) -> State{
+        return .goToLogin
+    }
+    
+    static func whenLoading() -> Feedback<State, Event>{
+        Feedback{ (state: State) -> AnyPublisher<Event, Never> in
+            print("whenloading State: \(state)")
+            guard case .loading = state else { return Empty().eraseToAnyPublisher() }
+            
+            let user = try? KeyChainItem().readItem()
+            var urlReq = UserRequest().valToken(email: user!.account, token: user!.token)
+            urlReq.req.httpBody = urlReq.json
+            
+            return URLSession.shared.dataTaskPublisher(for: urlReq.req)
+                .tryMap { (data, response) in
+                    guard let httpResponse = response as? HTTPURLResponse,
+                          httpResponse.statusCode < 300
+                          else { throw ReqError.unhandledError}
+                }
+                .map{ Event.onLoadingSuccess }
+                .catch{ Just(Event.onLoadingFail($0)) }
+                .eraseToAnyPublisher()
+            
+            
+//            return Just(0)
+//                .map { $0 }
+//                .map { $0 == 1 ? Event.onLoadingSuccess: Event.onLoadingFail }
+//                .catch{ _ in Just(Event.onLoadingFail) }
+//                .eraseToAnyPublisher()
+        }
+    }
+    
+    static func userInput(input: AnyPublisher<Event, Never>) -> Feedback<State, Event>{
+        Feedback { _ in input }
+    }
 }
 
 
