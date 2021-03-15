@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Combine
 
 struct HomeView: View {
     @ObservedObject var viewModel : HomeViewModel
@@ -15,15 +14,9 @@ struct HomeView: View {
     
     var body: some View {
         content()
-            .onReceive(viewModel.$state, perform: { state in
-                switch state {
-                case .loadingFailed:
-                    unAuthorized = true
-                default:
-                    print("-")
-                }
-                
-        })
+            .ignoresSafeArea()
+            .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
     }
     
     private func content() -> some View {
@@ -40,47 +33,22 @@ struct HomeView: View {
     }
     
     private func homeScreen() -> some View{
-        NavigationView{
-            TabView{
-                Text("First")
-                    .tabItem { Text("first") }
-                Text("Second")
-                    .tabItem { Text("second") }
-            }.background(NavigationLink(
-                            destination: LoginView(viewModel: LoginViewModel()),
-                            isActive: $unAuthorized,
-                            label: {
-                                Text("")
-                            }))
-            .onChange(of: unAuthorized, perform: { value in
-                print("value : \(value)")
-            })
+        TabView{
+            Text("First")
+                .tabItem { Text("first") }
+            Text("Second")
+                .tabItem { Text("second") }
         }
-        
     }
     
     private func spinner() -> some View {
         ProgressView()
     }
-    
-    private func goToLoginView() -> some View {
-        NavigationView{
-            NavigationLink(
-                destination: LoginView(viewModel: LoginViewModel()),
-                isActive: .constant(true),
-                label: {
-                    Text("")
-                })
-        }
-        .ignoresSafeArea()
-//        .navigationBarHidden(true)
-    }
-    
-    
+
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(viewModel: HomeViewModel(state: .idle))
+        HomeView(viewModel: HomeViewModel())
     }
 }

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Combine
 
 struct LoginView: View {
     @ObservedObject var viewModel : LoginViewModel
@@ -17,28 +16,50 @@ struct LoginView: View {
     
     var body: some View {
         VStack{
-            content()
+            content
         }
         .navigationBarHidden(true)
         .ignoresSafeArea()
     }
-    
-    private func content() -> some View{
+
+    private var content : some View {
         switch viewModel.state {
+        case .authenticating:
+            return spinner.eraseToAnyView()
+        case .authenticated:
+            return goToHomeView.eraseToAnyView()
+        case .authenticationFail:
+            viewModel.send(event: .onAuth)
+            return Text("FAILED to AUTHENTICATE").eraseToAnyView()
+        case .loggingIn:
+            return spinner.eraseToAnyView()
+        case .loginFail:
+            return Text("LOGIN FAILED").eraseToAnyView()
         case .idle:
             return LoginForm(goToHomePage: false)
                     .environmentObject(viewModel)
                     .eraseToAnyView()
-        case .loading:
-            return Text("Loading").eraseToAnyView()
-        case .loadingFail:
-            return Text("Loading failed").eraseToAnyView()
-        case .loggingIn:
-            self.presentationMode.wrappedValue.dismiss()
-            return EmptyView().eraseToAnyView()
+        case .refreshingToken:
+            return spinner.eraseToAnyView()
         }
     }
-
+    
+    private var spinner: some View {
+        ProgressView()
+    }
+    
+    private var goToHomeView: some View {
+        NavigationView{
+            NavigationLink(
+                destination: HomeView(viewModel: HomeViewModel()),
+                isActive: .constant(true),
+                label: {
+                    Text("")
+                })
+                .navigationBarHidden(true)
+        }
+    }
+    
 }
 
 struct LoginForm: View{
@@ -54,15 +75,10 @@ struct LoginForm: View{
                 TextField("Email", text: $email)
                 SecureField("Password", text: $password)
                 Button("Login"){
-                    viewModel.send(event: .onlogin(email.lowercased(), password))
+                    viewModel.send(event: .onLoginReq(email.lowercased(), password))
                 }
-            }.padding()
-//            NavigationLink(
-//                destination: HomeView(viewModel: HomeViewModel(state: .idle)),
-//                isActive: $goToHomePage,
-//                label: {
-//                    Text("")
-//            })
+            }
+            .padding()
         }
     }
 }

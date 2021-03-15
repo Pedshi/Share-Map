@@ -40,7 +40,7 @@ class UserRequest {
             //Should also save account and password for update token
             if let cookie = httpResponse.value(forHTTPHeaderField: "Set-Cookie") {
                 guard let token = self?.trimCookie(cookie: cookie) else{ return }
-                try? KeyChainItem().saveItem(token: token, account: email.lowercased())
+                try? KeyChainItem.Token.saveItem(secretValue: token, account: email.lowercased())
                 print("Logged in")
             }
 
