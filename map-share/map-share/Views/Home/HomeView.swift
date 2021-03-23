@@ -34,16 +34,19 @@ struct HomeView: View {
     
     private func homeScreen() -> some View{
         TabView{
-            Text("First")
-                .tabItem { Text("first") }
+            MapView(viewModel: MapViewModel())
+                .tabItem { Label(homeTab, systemImage: "map") }
             Text("Second")
-                .tabItem { Text("second") }
+                .tabItem { Label(profileTab, systemImage: "person.crop.circle") }
         }
     }
     
     private func spinner() -> some View {
         ProgressView()
     }
+    
+    let homeTab = "Hem"
+    let profileTab = "Profil"
 
 }
 

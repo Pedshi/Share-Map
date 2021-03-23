@@ -57,10 +57,6 @@ extension HomeViewModel{
     }
     
     static func reduce(state: State, event: Event) -> State{
-        print("In : HomeViewModel")
-        print("current State : \(state)")
-        print("current Event : \(event)")
-        print("-------------------------------------")
         switch state {
         case .idle:
             return reduceIdle(state: state, event: event)
@@ -86,12 +82,6 @@ extension HomeViewModel{
         default:
             return state
         }
-    }
-    
-    enum ReqError: Error {
-        case noItemFound
-        case unexpectedItemData
-        case unhandledError
     }
     
     static func reduceLoadingFailed(state: State, event: Event) -> State{

@@ -16,31 +16,28 @@ struct LoginView: View {
     
     var body: some View {
         VStack{
-            content
+            content()
         }
         .navigationBarHidden(true)
         .ignoresSafeArea()
     }
 
-    private var content : some View {
+    @ViewBuilder
+    private func content() -> some View {
         switch viewModel.state {
         case .authenticating:
-            return spinner.eraseToAnyView()
+            spinner
         case .authenticated:
-            return goToHomeView.eraseToAnyView()
-        case .authenticationFail:
-            viewModel.send(event: .onAuth)
-            return Text("FAILED to AUTHENTICATE").eraseToAnyView()
+            goToHomeView
         case .loggingIn:
-            return spinner.eraseToAnyView()
+            spinner
         case .loginFail:
-            return Text("LOGIN FAILED").eraseToAnyView()
+            Text("LOGIN FAILED")
         case .idle:
-            return LoginForm(goToHomePage: false)
+            LoginForm(goToHomePage: false)
                     .environmentObject(viewModel)
-                    .eraseToAnyView()
         case .refreshingToken:
-            return spinner.eraseToAnyView()
+            spinner
         }
     }
     
@@ -75,7 +72,10 @@ struct LoginForm: View{
                 TextField("Email", text: $email)
                 SecureField("Password", text: $password)
                 Button("Login"){
-                    viewModel.send(event: .onLoginReq(email.lowercased(), password))
+                    viewModel.send(event: .onLoginReq(
+                                    email: email.lowercased(),
+                                    password: password)
+                    )
                 }
             }
             .padding()
