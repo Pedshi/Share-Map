@@ -40,13 +40,49 @@ struct MapWithMarkers: View {
     )
     var markers : [Place]
     
+    @State private var showDetail = false
+    @State private var selectedPlace = Place(
+        id: "1",
+        latitude: 0,
+        longitude: 0,
+        name: "-",
+        address: "-",
+        openingHours: ["mon" : "09:00-21:00"]
+    )
+    
     var body : some View {
-        Map(coordinateRegion: $coor, annotationItems: markers) { marker in
-            marker.location
+        GeometryReader { geometry in
+            ZStack(alignment: .top){
+                Map(coordinateRegion: $coor, annotationItems: markers) { marker in
+                    MapAnnotation(coordinate: marker.coord){
+                        Image(systemName: "mappin")
+                            .font(.title)
+                            .foregroundColor(.red)
+                            .onTapGesture {
+                                withAnimation(.easeInOut(duration: AnimationDurr.short.rawValue) ){
+                                    showDetail = true
+                                    selectedPlace = marker
+                                }
+                            }
+                    }
+                }.zIndex(1)
+                HalfModal(
+                    visible: $showDetail,
+                    place: selectedPlace,
+                    offset: geometry.size.height
+                )
+                    .zIndex(2)
+                    
+            }
         }
         .ignoresSafeArea()
     }
 }
+
+
+
+
+
 
 
 struct MapView_Previews: PreviewProvider {
@@ -54,3 +90,6 @@ struct MapView_Previews: PreviewProvider {
         MapView(viewModel: MapViewModel())
     }
 }
+
+
+

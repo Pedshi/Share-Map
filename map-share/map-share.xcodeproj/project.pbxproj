@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C10835D9260B39BF002E7B14 /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10835D8260B39BF002E7B14 /* IntegrationTests.swift */; };
 		C1158F6826037E56006AAE85 /* MockReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1158F6726037E56006AAE85 /* MockReponse.swift */; };
 		C132A2EF25FA4BB40064AB36 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = C132A2EE25FA4BB40064AB36 /* Feedback.swift */; };
 		C132A2F425FA4BBD0064AB36 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = C132A2F325FA4BBD0064AB36 /* System.swift */; };
@@ -36,6 +37,9 @@
 		C1A32A2925F7F80C00226172 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A32A2825F7F80C00226172 /* HomeView.swift */; };
 		C1A32A3225F7FAD700226172 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A32A3125F7FAD700226172 /* HomeViewModel.swift */; };
 		C1D9E9DE2601427C00CF6C8D /* KeyChainManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D9E9DD2601427C00CF6C8D /* KeyChainManagerTests.swift */; };
+		C1F600E82612167F00FBE0E3 /* HalfModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F600E72612167F00FBE0E3 /* HalfModal.swift */; };
+		C1F600ED261262D500FBE0E3 /* StyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F600EC261262D500FBE0E3 /* StyleSheet.swift */; };
+		C1F600F226126CB800FBE0E3 /* Date+Get.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F600F126126CB800FBE0E3 /* Date+Get.swift */; };
 		C1FB6D9B2608E4B4001CD9B5 /* EndpointsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FB6D9A2608E4B4001CD9B5 /* EndpointsTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C10835D8260B39BF002E7B14 /* IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
 		C1158F6726037E56006AAE85 /* MockReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockReponse.swift; sourceTree = "<group>"; };
 		C132A2EE25FA4BB40064AB36 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		C132A2F325FA4BBD0064AB36 /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
@@ -92,6 +97,9 @@
 		C1A32A2825F7F80C00226172 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C1A32A3125F7FAD700226172 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		C1D9E9DD2601427C00CF6C8D /* KeyChainManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManagerTests.swift; sourceTree = "<group>"; };
+		C1F600E72612167F00FBE0E3 /* HalfModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModal.swift; sourceTree = "<group>"; };
+		C1F600EC261262D500FBE0E3 /* StyleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSheet.swift; sourceTree = "<group>"; };
+		C1F600F126126CB800FBE0E3 /* Date+Get.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Get.swift"; sourceTree = "<group>"; };
 		C1FB6D9A2608E4B4001CD9B5 /* EndpointsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,6 +170,7 @@
 			children = (
 				C145BDB42603B60700CBFAAA /* MapViewModel.swift */,
 				C145BDBF2603B62400CBFAAA /* MapView.swift */,
+				C1F600E72612167F00FBE0E3 /* HalfModal.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -171,6 +180,7 @@
 			children = (
 				C15D1E5225FA6D14006304D5 /* View+AnyView.swift */,
 				C1785B152609E5B20051AF12 /* DataTaskPublisher+ValidResponse.swift */,
+				C1F600F126126CB800FBE0E3 /* Date+Get.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -180,6 +190,7 @@
 			children = (
 				C145674E2601EA6E00942D45 /* UserRequestTests.swift */,
 				C1785B1B2609F6EC0051AF12 /* PlaceRequestTests.swift */,
+				C10835D8260B39BF002E7B14 /* IntegrationTests.swift */,
 			);
 			path = ApiTest;
 			sourceTree = "<group>";
@@ -267,6 +278,7 @@
 			children = (
 				C1785B28260A2B3C0051AF12 /* KeyChain */,
 				C145BDAE2603ABDD00CBFAAA /* Enpoints.swift */,
+				C1F600EC261262D500FBE0E3 /* StyleSheet.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -420,10 +432,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1A32A1725F7895300226172 /* KeyChainManager.swift in Sources */,
+				C1F600ED261262D500FBE0E3 /* StyleSheet.swift in Sources */,
 				C1785B162609E5B20051AF12 /* DataTaskPublisher+ValidResponse.swift in Sources */,
 				C145BDC02603B62400CBFAAA /* MapView.swift in Sources */,
 				C1A329CE25F658A000226172 /* Persistence.swift in Sources */,
 				C132A2EF25FA4BB40064AB36 /* Feedback.swift in Sources */,
+				C1F600F226126CB800FBE0E3 /* Date+Get.swift in Sources */,
 				C1A329C725F6589D00226172 /* LoginView.swift in Sources */,
 				C1A32A3225F7FAD700226172 /* HomeViewModel.swift in Sources */,
 				C1785B2A260A2C140051AF12 /* KeyChain.swift in Sources */,
@@ -436,6 +450,7 @@
 				C1A329FB25F65F7200226172 /* LoginViewModel.swift in Sources */,
 				C1A32A2025F7A3A000226172 /* UserRequest.swift in Sources */,
 				C15D1E5325FA6D14006304D5 /* View+AnyView.swift in Sources */,
+				C1F600E82612167F00FBE0E3 /* HalfModal.swift in Sources */,
 				C132A2F425FA4BBD0064AB36 /* System.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,6 +461,7 @@
 			files = (
 				C14567592602110D00942D45 /* LoginViewModelTests.swift in Sources */,
 				C174484A260344F9005AD809 /* MockSession.swift in Sources */,
+				C10835D9260B39BF002E7B14 /* IntegrationTests.swift in Sources */,
 				C1158F6826037E56006AAE85 /* MockReponse.swift in Sources */,
 				C1581723260A3CA9003C7822 /* MockKeyChain.swift in Sources */,
 				C1785B1C2609F6EC0051AF12 /* PlaceRequestTests.swift in Sources */,

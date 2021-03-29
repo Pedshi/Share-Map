@@ -70,7 +70,9 @@ struct LoginForm: View{
         ZStack{
             VStack{
                 TextField("Email", text: $email)
+                    .accessibility(identifier: "loginEmailField")
                 SecureField("Password", text: $password)
+                    .accessibility(identifier: "loginPasswordField")
                 Button("Login"){
                     viewModel.send(event: .onLoginReq(
                                     email: email.lowercased(),
@@ -82,11 +84,6 @@ struct LoginForm: View{
         }
     }
 }
-
-
-
-
-
 
 
 

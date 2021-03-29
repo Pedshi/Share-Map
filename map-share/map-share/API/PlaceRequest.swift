@@ -29,11 +29,9 @@ struct Place : Identifiable, Codable {
     var longitude : Double
     var name : String
     var address : String
+    var openingHours : [String: String]
     
-    var location : MapMarker {
-        MapMarker(coordinate: CLLocationCoordinate2D(
-            latitude: self.latitude,
-            longitude: self.longitude
-        ))
+    var coord : CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude)
     }
 }

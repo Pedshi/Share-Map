@@ -76,7 +76,7 @@ extension MapViewModel {
     static func whenLoading() -> Feedback<State, Event> {
         Feedback { (state: State) -> AnyPublisher<Event, Never>  in
             guard case .loading = state else { return Empty().eraseToAnyPublisher() }
-
+            
             return API.Place.fetchPlaces()
                 .decode(type: [Place].self, decoder: JSONDecoder())
                 .receive(on: DispatchQueue.main)

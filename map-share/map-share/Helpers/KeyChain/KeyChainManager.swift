@@ -107,14 +107,15 @@ struct KeyChainManager : KeyChainManagerProtocol{
 }
     
 extension KeyChainManager {
-    static let Passwrd: KeyChainManagerProtocol = KeyChainManager(
+    static var Passwrd: KeyChainManagerProtocol = KeyChainManager(
         label: "Password",
         type: 11,
         service: "com.map-share.password"
     )
-    static let Token: KeyChainManagerProtocol = KeyChainManager(
+    static var Token: KeyChainManagerProtocol = KeyChainManager(
         label: "Token",
         type: 22,
         service: "com.map-share.token"
     )
 }
+

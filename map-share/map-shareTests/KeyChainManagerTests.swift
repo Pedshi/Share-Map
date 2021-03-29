@@ -32,14 +32,14 @@ class KeyChainManagerTests: XCTestCase {
             kSecAttrAccount as String: testEmail as Any,
             kSecValueData as String: enctryptedPass as Any
         ] as AnyObject
-        kCMock.result = result
+        kCMock.setReadResponse(result: result)
         let response = try kCManager.readItem()
         XCTAssertEqual(response.account , testEmail)
         XCTAssertEqual(response.secretValue, testPassword)
     }
     
     func test_readMissin_throws() throws {
-        kCMock.responseRead = errSecItemNotFound
+        kCMock.setReadResponse(status: errSecItemNotFound, result: nil)
         do{
             _ = try kCManager.readItem()
             XCTAssert(false)
@@ -51,7 +51,7 @@ class KeyChainManagerTests: XCTestCase {
     }
     
     func test_readUnknowErr_throws() throws {
-        kCMock.responseRead = errSecInvalidAction
+        kCMock.setReadResponse(status: errSecInvalidAction, result: nil)
         do{
             _ = try kCManager.readItem()
             XCTAssert(false)
@@ -63,7 +63,7 @@ class KeyChainManagerTests: XCTestCase {
     }
     
     func test_readNoResult_throws() throws {
-        kCMock.result = nil
+        kCMock.readResult = nil
         do{
             _ = try kCManager.readItem()
             XCTAssert(false)
@@ -75,7 +75,7 @@ class KeyChainManagerTests: XCTestCase {
     }
     
     func test_save_success() throws {
-        kCMock.responseRead = errSecItemNotFound
+        kCMock.setReadResponse(status: errSecItemNotFound, result: nil)
         XCTAssertNoThrow(
             try kCManager.saveItem(account: testEmail, secretValue: testPassword)
         )
@@ -86,7 +86,7 @@ class KeyChainManagerTests: XCTestCase {
             kSecAttrAccount as String: testEmail as Any,
             kSecValueData as String: enctryptedPass as Any
         ] as AnyObject
-        kCMock.result = result
+        kCMock.setReadResponse(result: result)
         do{
             _ = try kCManager.saveItem(account: testEmail, secretValue: testPassword)
             XCTAssert(false)
@@ -103,12 +103,11 @@ class KeyChainManagerTests: XCTestCase {
             kSecAttrAccount as String: testEmail as Any,
             kSecValueData as String: oldPass as Any
         ] as AnyObject
-        kCMock.result = result
+        kCMock.setReadResponse(result: result)
         XCTAssertNoThrow(
             try kCManager.saveItem(account: testEmail, secretValue: testPassword)
         )
     }
-    
     
     func test_saveUpdateAccount_success() throws {
         let oldEmail = "oldEmail"
@@ -116,14 +115,14 @@ class KeyChainManagerTests: XCTestCase {
             kSecAttrAccount as String: oldEmail as Any,
             kSecValueData as String: enctryptedPass as Any
         ] as AnyObject
-        kCMock.result = result
+        kCMock.setReadResponse(result: result)
         XCTAssertNoThrow(
             try kCManager.saveItem(account: testEmail, secretValue: testPassword)
         )
     }
     
     func test_saveReadError_throws() throws {
-        kCMock.responseRead = errSecInvalidAction
+        kCMock.setReadResponse(status: errSecInvalidAction, result: nil)
         XCTAssertThrowsError(
             try kCManager.saveItem(account: testEmail, secretValue: testPassword)
         )
