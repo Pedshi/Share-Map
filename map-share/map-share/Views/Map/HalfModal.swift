@@ -11,7 +11,7 @@ struct HalfModal: View{
     @GestureState var gestureClose : CGFloat = 0.0
     
     @Binding var visible : Bool
-    var place : Place
+    var place : Place?
     var offset : CGFloat
     private var height : CGFloat {
         maxHeight - gestureClose
@@ -23,7 +23,7 @@ struct HalfModal: View{
     }
     
     var body: some View {
-        if visible{
+        if visible, let place = place{
             ZStack(alignment: .top){
                 Blur(effect: UIBlurEffect(style: .systemThickMaterial))
                     .cornerRadius(RadiusSize.small.rawValue)
@@ -83,7 +83,6 @@ struct HalfModal: View{
                 }
             }
     }
-    
     
     private let minCloseGesture : CGFloat = 40
     private let maxHeight : CGFloat = 280

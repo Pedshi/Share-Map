@@ -10,7 +10,7 @@ import Combine
 
 class MapViewModel: ObservableObject {
     @Published var state : State = .loading
- 
+
     private var bag = Set<AnyCancellable>()
     
     private let input = PassthroughSubject<Event, Never>()
