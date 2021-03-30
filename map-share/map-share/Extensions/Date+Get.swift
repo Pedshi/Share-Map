@@ -12,6 +12,6 @@ extension Date {
         return calendar.component(component, from: self)
     }
     static var weekDayList : [String] {
-        ["sun","mon","tue","wed","thu","fri","sat","sun"]
+        ["sun","mon","tue","wed","thu","fri","sat"]
     }
 }

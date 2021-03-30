@@ -19,7 +19,7 @@ struct HalfModal: View{
     
     var currentDay : String {
         let day = Date().get(.weekday)
-        return Date.weekDayList[day]
+        return Date.weekDayList[day-1]
     }
     
     var body: some View {
