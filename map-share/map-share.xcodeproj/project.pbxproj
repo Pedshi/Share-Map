@@ -11,6 +11,7 @@
 		C1158F6826037E56006AAE85 /* MockReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1158F6726037E56006AAE85 /* MockReponse.swift */; };
 		C132A2EF25FA4BB40064AB36 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = C132A2EE25FA4BB40064AB36 /* Feedback.swift */; };
 		C132A2F425FA4BBD0064AB36 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = C132A2F325FA4BBD0064AB36 /* System.swift */; };
+		C13E7C3026150AE400E68012 /* Handlebars.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13E7C2F26150AE400E68012 /* Handlebars.swift */; };
 		C145674F2601EA6E00942D45 /* UserRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C145674E2601EA6E00942D45 /* UserRequestTests.swift */; };
 		C14567592602110D00942D45 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14567582602110D00942D45 /* LoginViewModelTests.swift */; };
 		C145BDAF2603ABDD00CBFAAA /* Enpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C145BDAE2603ABDD00CBFAAA /* Enpoints.swift */; };
@@ -68,6 +69,7 @@
 		C1158F6726037E56006AAE85 /* MockReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockReponse.swift; sourceTree = "<group>"; };
 		C132A2EE25FA4BB40064AB36 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		C132A2F325FA4BBD0064AB36 /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
+		C13E7C2F26150AE400E68012 /* Handlebars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handlebars.swift; sourceTree = "<group>"; };
 		C145674E2601EA6E00942D45 /* UserRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestTests.swift; sourceTree = "<group>"; };
 		C14567582602110D00942D45 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		C145BDAE2603ABDD00CBFAAA /* Enpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enpoints.swift; sourceTree = "<group>"; };
@@ -169,6 +171,14 @@
 				C132A2F325FA4BBD0064AB36 /* System.swift */,
 			);
 			path = FeedBack;
+			sourceTree = "<group>";
+		};
+		C13E7C2E26150AAD00E68012 /* ViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				C13E7C2F26150AE400E68012 /* Handlebars.swift */,
+			);
+			path = ViewComponents;
 			sourceTree = "<group>";
 		};
 		C145BDB32603B5E600CBFAAA /* Map */ = {
@@ -284,6 +294,7 @@
 		C1A32A1525F7885D00226172 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C13E7C2E26150AAD00E68012 /* ViewComponents */,
 				C1785B28260A2B3C0051AF12 /* KeyChain */,
 				C145BDAE2603ABDD00CBFAAA /* Enpoints.swift */,
 				C1F600EC261262D500FBE0E3 /* StyleSheet.swift */,
@@ -455,6 +466,7 @@
 				C145BDAF2603ABDD00CBFAAA /* Enpoints.swift in Sources */,
 				C145BDB52603B60700CBFAAA /* MapViewModel.swift in Sources */,
 				C145BDC52603C53A00CBFAAA /* PlaceRequest.swift in Sources */,
+				C13E7C3026150AE400E68012 /* Handlebars.swift in Sources */,
 				C1DB480C261320D400D1455F /* LocationManager.swift in Sources */,
 				C1A329C525F6589D00226172 /* map_shareApp.swift in Sources */,
 				C1A32A2925F7F80C00226172 /* HomeView.swift in Sources */,

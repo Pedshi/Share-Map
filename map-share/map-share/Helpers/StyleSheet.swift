@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 enum AnimationDurr: Double{
-    case short = 0.5
-    case medium = 0.8
-    case long = 1.2
+    case short = 0.3
+    case medium = 0.5
+    case long = 0.8
 }
 
 enum RadiusSize: CGFloat {

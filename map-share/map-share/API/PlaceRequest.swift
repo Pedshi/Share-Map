@@ -23,13 +23,24 @@ extension API{
 }
 
 
-struct Place : Identifiable, Codable {
+struct Place : Identifiable, Codable, Equatable {
     var id : String
     var latitude : Double
     var longitude : Double
     var name : String
     var address : String
     var openingHours : [String: String]
+    var category : [Int]
+    
+    var isSelected: Bool? = false
+    
+    mutating func selected(){
+        isSelected = true
+    }
+    
+    mutating func deselect(){
+        isSelected = false
+    }
     
     var coord : CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude)

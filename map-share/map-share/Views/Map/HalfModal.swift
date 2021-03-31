@@ -11,7 +11,7 @@ struct HalfModal: View{
     @GestureState var gestureClose : CGFloat = 0.0
     
     @Binding var visible : Bool
-    var place : Place?
+    @Binding var place : Place
     var offset : CGFloat
     private var height : CGFloat {
         maxHeight - gestureClose
@@ -22,16 +22,19 @@ struct HalfModal: View{
         return Date.weekDayList[day-1]
     }
     
+    init(visible: Binding<Bool>, place: Binding<Place>, offset: CGFloat){
+        self._visible = visible
+        self._place = place
+        self.offset = offset
+    }
+    
     var body: some View {
-        if visible, let place = place{
+        if visible {
             ZStack(alignment: .top){
                 Blur(effect: UIBlurEffect(style: .systemThickMaterial))
                     .cornerRadius(RadiusSize.small.rawValue)
                 VStack{
-                    Capsule()
-                        .fill(Color(UIColor.lightGray))
-                        .frame(width: 30, height: 3)
-                        .padding(Pad.medium.rawValue)
+                    Handlebar()
                     HStack(alignment: .top){
                         VStack(alignment: .leading, spacing: Pad.small.rawValue){
                             Text(place.name)
@@ -47,13 +50,11 @@ struct HalfModal: View{
                         Spacer()
                         
                         Button(action: {
-                            withAnimation(.easeInOut(duration: AnimationDurr.short.rawValue)){
-                                visible = false
-                            }
+                            visible = false
                         }, label: {
-                            Image(systemName: "xmark.circle")
+                            Image(systemName: "xmark.circle.fill")
                                 .foregroundColor(.secondary)
-                                .font(.system(size: 20))
+                                .imageScale(.large)
                                 .frame(width: 44, height: 44, alignment: .topTrailing)
                         })
                     }
@@ -64,7 +65,13 @@ struct HalfModal: View{
             .offset(y: offset - height)
             .gesture(closeGesture())
             .transition(.move(edge: .bottom))
-            .animation(.default)
+            .animation(.easeInOut(duration: AnimationDurr.short.rawValue))
+            .onChange(of: self.place, perform: {place in
+                self.place.deselect()
+            })
+            .onDisappear{
+                self.place.deselect()
+            }
         }else{
             EmptyView()
         }
@@ -95,19 +102,20 @@ struct Blur: UIViewRepresentable {
     func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
 }
 
-struct HalfModal_Previews: PreviewProvider {
-    static var previews: some View {
-        HalfModal(
-            visible: Binding.constant(true),
-            place: Place(
-                id: "1",
-                latitude: 59,
-                longitude: 18,
-                name: "Fors Artisan",
-                address: "Löjtnantsgatan 8, 115 50 Stockholm",
-                openingHours: ["mon" : "09:00-21:00"]
-            ),
-            offset: 200.0
-        )
-    }
-}
+//struct HalfModal_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HalfModal(
+//            visible: Binding.constant(true),
+//            place: Binding.contant(Place(
+//                id: "1",
+//                latitude: 59,
+//                longitude: 18,
+//                name: "Fors Artisan",
+//                address: "Löjtnantsgatan 8, 115 50 Stockholm",
+//                openingHours: ["mon" : "09:00-21:00"],
+//                category: [1]
+//            )),
+//            offset: 200.0
+//        )
+//    }
+//}
