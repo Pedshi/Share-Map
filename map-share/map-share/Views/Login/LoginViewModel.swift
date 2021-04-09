@@ -17,7 +17,7 @@ class LoginViewModel : ObservableObject{
     
     init() {
         state = .authenticating
-        
+
         Publishers.system(
             initial: state,
             reduce: Self.reduce,

@@ -7,6 +7,16 @@
     {
       "filename" : "drinkpin.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "drink-dark.svg",
+      "idiom" : "universal"
     }
   ]
 }

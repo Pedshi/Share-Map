@@ -46,7 +46,6 @@ extension API {
 }
 
 enum UserRequest {
-    //MARK: - Conviniece
     static func requestBody(email: String, password: String? = nil) -> Data{
         var rawBody = [String:String]()
         rawBody["email"] = email.lowercased()

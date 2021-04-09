@@ -9,7 +9,8 @@ import SwiftUI
 
 struct MapView: View {
     @ObservedObject var viewModel : MapViewModel
-    
+    @State private var alert = true
+        
     var body: some View {
         content()
             .ignoresSafeArea()
@@ -24,12 +25,22 @@ struct MapView: View {
             MapWithMarkers(markers: places)
                 .environmentObject(viewModel)
         case .loadingFailed:
-            Text("Failed to load locations")
+            loadingFailed()
         }
     }
     
     private var spinner: some View {
         ProgressView()
+    }
+    
+    func loadingFailed() -> some View {
+        VStack{
+            Image(systemName: "wifi.slash")
+                .foregroundColor(.secondary)
+                .imageScale(.large)
+            Text("Failed to fetch saved locations.")
+                .padding(Pad.medium.rawValue)
+        }
     }
 }
 

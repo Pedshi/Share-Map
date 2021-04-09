@@ -7,6 +7,16 @@
     {
       "filename" : "cutlerypin.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "cutlery-dark.svg",
+      "idiom" : "universal"
     }
   ]
 }

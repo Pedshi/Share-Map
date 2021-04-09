@@ -39,6 +39,8 @@
 		C1A32A3225F7FAD700226172 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A32A3125F7FAD700226172 /* HomeViewModel.swift */; };
 		C1A43D3D261395DD00BE7E13 /* MapWithMarkers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A43D3C261395DD00BE7E13 /* MapWithMarkers.swift */; };
 		C1D9E9DE2601427C00CF6C8D /* KeyChainManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D9E9DD2601427C00CF6C8D /* KeyChainManagerTests.swift */; };
+		C1DA0BC3261CA27E00097EE2 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DA0BC2261CA27E00097EE2 /* RegisterView.swift */; };
+		C1DA0BC8261CAD8E00097EE2 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DA0BC7261CAD8E00097EE2 /* FormView.swift */; };
 		C1DB4807261308B700D1455F /* ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DB4806261308B700D1455F /* ExtensionTests.swift */; };
 		C1DB480C261320D400D1455F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DB480B261320D400D1455F /* LocationManager.swift */; };
 		C1F600E82612167F00FBE0E3 /* HalfModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F600E72612167F00FBE0E3 /* HalfModal.swift */; };
@@ -103,6 +105,8 @@
 		C1A32A3125F7FAD700226172 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		C1A43D3C261395DD00BE7E13 /* MapWithMarkers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWithMarkers.swift; sourceTree = "<group>"; };
 		C1D9E9DD2601427C00CF6C8D /* KeyChainManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManagerTests.swift; sourceTree = "<group>"; };
+		C1DA0BC2261CA27E00097EE2 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		C1DA0BC7261CAD8E00097EE2 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
 		C1DB4806261308B700D1455F /* ExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionTests.swift; sourceTree = "<group>"; };
 		C1DB480B261320D400D1455F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		C1F600E72612167F00FBE0E3 /* HalfModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModal.swift; sourceTree = "<group>"; };
@@ -151,6 +155,8 @@
 			children = (
 				C1A329FA25F65F7200226172 /* LoginViewModel.swift */,
 				C1A329C625F6589D00226172 /* LoginView.swift */,
+				C1DA0BC2261CA27E00097EE2 /* RegisterView.swift */,
+				C1DA0BC7261CAD8E00097EE2 /* FormView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -451,6 +457,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1DA0BC8261CAD8E00097EE2 /* FormView.swift in Sources */,
 				C1A43D3D261395DD00BE7E13 /* MapWithMarkers.swift in Sources */,
 				C1A32A1725F7895300226172 /* KeyChainManager.swift in Sources */,
 				C1F600ED261262D500FBE0E3 /* StyleSheet.swift in Sources */,
@@ -462,6 +469,7 @@
 				C1A329C725F6589D00226172 /* LoginView.swift in Sources */,
 				C1A32A3225F7FAD700226172 /* HomeViewModel.swift in Sources */,
 				C1785B2A260A2C140051AF12 /* KeyChain.swift in Sources */,
+				C1DA0BC3261CA27E00097EE2 /* RegisterView.swift in Sources */,
 				C1A329D125F658A000226172 /* map_share.xcdatamodeld in Sources */,
 				C145BDAF2603ABDD00CBFAAA /* Enpoints.swift in Sources */,
 				C145BDB52603B60700CBFAAA /* MapViewModel.swift in Sources */,
@@ -653,7 +661,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pedshi.map-share";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -674,7 +682,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pedshi.map-share";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -7,6 +7,16 @@
     {
       "filename" : "shoppin.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "shoppin-dark.svg",
+      "idiom" : "universal"
     }
   ]
 }

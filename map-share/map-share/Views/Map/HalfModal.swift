@@ -101,21 +101,3 @@ struct Blur: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
     func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
 }
-
-//struct HalfModal_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HalfModal(
-//            visible: Binding.constant(true),
-//            place: Binding.contant(Place(
-//                id: "1",
-//                latitude: 59,
-//                longitude: 18,
-//                name: "Fors Artisan",
-//                address: "Löjtnantsgatan 8, 115 50 Stockholm",
-//                openingHours: ["mon" : "09:00-21:00"],
-//                category: [1]
-//            )),
-//            offset: 200.0
-//        )
-//    }
-//}

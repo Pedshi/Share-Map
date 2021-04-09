@@ -41,13 +41,13 @@ struct MapWithMarkers: View {
                             .onTapGesture {
                                 showDetail = true
                                 chosenIndex = markers.firstIndex(where: {$0.id == marker.id })
-                                markers[chosenIndex!].selected()
+                                markers[chosenIndex!].select()
                             }
-                            .scaleEffect( marker.isSelected ?? false ? 1.3 : 1)
+                            .scaleEffect( marker.isSelected ? 1.3 : 1)
                             .animation(.easeInOut(duration: AnimationDurr.short.rawValue))
                     }
                 }
-                    .zIndex(1)
+                .zIndex(1)
                 if markers.count > 0, let chosenIndex = chosenIndex {
                     HalfModal(
                         visible: $showDetail,

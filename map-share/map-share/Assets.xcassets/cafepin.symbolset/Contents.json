@@ -7,6 +7,16 @@
     {
       "filename" : "cafepin.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "pin-cross-dark.svg",
+      "idiom" : "universal"
     }
   ]
 }

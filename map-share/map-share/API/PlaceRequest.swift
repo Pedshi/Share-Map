@@ -32,9 +32,9 @@ struct Place : Identifiable, Codable, Equatable {
     var openingHours : [String: String]
     var category : [Int]
     
-    var isSelected: Bool? = false
+    var isSelected: Bool = false
     
-    mutating func selected(){
+    mutating func select(){
         isSelected = true
     }
     
@@ -44,5 +44,9 @@ struct Place : Identifiable, Codable, Equatable {
     
     var coord : CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude)
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id, latitude, longitude, name, address, openingHours, category
     }
 }
