@@ -8,42 +8,40 @@
 import SwiftUI
 
 struct RegisterView: View {
+    
+    //MARK: - COMPONENTS
+    var registerButton = TokenButton(
+        capsuleText: "Register with E-mail",
+        size: .large
+    )
+    
     var body: some View {
         GeometryReader { geometry in
             NavigationView{
                 ZStack(alignment: .top){
-                    VStack(spacing: geometry.size.height * 0.05){
+                    VStack(spacing: geometry.size.height * Layout.oneTwentieth.rawValue){
                         Image("standing")
-                            .fitResize(height: geometry.size.height * 0.5)
-                            .padding(.top, geometry.size.height * 0.03)
+                            .fitResize(height: geometry.size.height * Layout.oneHalf.rawValue)
+                            .padding(.top, geometry.size.height * Layout.oneTwentieth.rawValue)
 
-                        VStack(spacing: VSpace.small.rawValue){
+                        VStack{
                             NavigationLink(destination: FormView()){
-                                Text("Register with E-mail")
+                                registerButton.buttonLabel
                             }
-                            .buttonStyle(ActionButton(width: 320))
-                            
-                            Button(action: {
-                                
-                            }, label: {
-                                Text("Sign in with Apple")
-                                    .fontWeight(.semibold)
-                                    .padding(.vertical, 20)
-                                    .padding(.horizontal, 90)
-                                    .background(Color.black)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(30)
-                            })
-                        }
+                            .buttonStyle(registerButton.buttonStyle)
+                        }.frame(width: 100, height: 100, alignment: .center) //reported SwiftUI bug
                         
                     }
                 }
-                .navigationBarTitle("Register")
+                .navigationBarTitle(pageTitle)
                 .fullScreen(alignment: .top)
             }
             .ignoresSafeArea(.container)
         }
     }
+    
+    //MARK: - Texts
+    let pageTitle = "Register"
 }
 
 struct RegisterView_Previews: PreviewProvider {

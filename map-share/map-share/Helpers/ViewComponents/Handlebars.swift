@@ -12,6 +12,6 @@ import SwiftUI
         Capsule()
             .fill(Color(UIColor.lightGray))
             .frame(width: 30, height: 3)
-            .padding(Pad.medium.rawValue)
+            .padding(Space.times1.rawValue)
     }
 }

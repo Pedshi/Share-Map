@@ -9,8 +9,8 @@ import SwiftUI
 
 struct MapView: View {
     @ObservedObject var viewModel : MapViewModel
-    @State private var alert = true
-        
+    @State private var alert = true 
+    
     var body: some View {
         content()
             .ignoresSafeArea()
@@ -39,7 +39,7 @@ struct MapView: View {
                 .foregroundColor(.secondary)
                 .imageScale(.large)
             Text("Failed to fetch saved locations.")
-                .padding(Pad.medium.rawValue)
+                .padding(Space.times2.rawValue)
         }
     }
 }

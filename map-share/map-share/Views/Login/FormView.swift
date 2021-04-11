@@ -9,63 +9,54 @@ import SwiftUI
 
 struct FormView: View {
     
+    //MARK: - Variables
     @State private var email = ""
     @State private var password = ""
     @State private var passwordRepeat = ""
     
-    var registerButton = TokenButton(buttonText: "Register", size: .large)
+    //MARK: - Components
+    var registerButton = TokenButton(capsuleText: "Register", size: .large)
+    var emailLabel = TokenTextFieldLabel(name: "E-mail")
+    var passwordLabel = TokenTextFieldLabel(name: "Password")
+    var rePasswordLabel = TokenTextFieldLabel(name: "Repeat Password")
     
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
-                VStack(alignment: .leading, spacing: VSpace.medium.rawValue){
-                    emailField
+                VStack(alignment: .leading, spacing: Space.times5.rawValue){
+                    VStack(alignment: .leading){
+                        emailLabel
+                        TextField(mailFieldText, text: $email)
+                    }
+                    .padding(.top, Space.times3.rawValue)
+
                     VStack{
-                        passwordField(pswrdText, text: $password)
-                        passwordField(rePswrdText, text: $passwordRepeat)
+                        VStack(alignment: .leading){
+                            passwordLabel
+                            SecureField(pswrdText, text: $password)
+                        }
+                        VStack(alignment: .leading){
+                            rePasswordLabel
+                            SecureField(rePswrdText, text: $passwordRepeat)
+                        }
                     }
                     
                     Button(action: {
                         
-                    }, label: {
-                        registerButton.buttonLabel
-                    }).buttonStyle(registerButton.buttonStyle)
-                    
-//                    Button("Register"){
-//
-//                    }
-//                    .buttonStyle(ActionButton(width: geometry.size.width * 0.9))
-////                    .padding(.horizontal, Pad.large1.rawValue)
+                    }){ registerButton.buttonLabel }
+                        .buttonStyle(registerButton.buttonStyle)
                 }
-                .textFieldStyle(SingleTextFieldStyle(width: geometry.size.width * 0.75))
+                .textFieldStyle(
+                    TokenTextFieldStyle(width: geometry.size.width * Layout.threeQuarters.rawValue)
+                )
             }
             .navigationBarTitle(navBarTitle)
-            .padding(.leading, 10)
-//            .fullScreen(alignment: .top)
+            .padding(.leading, Space.times2.rawValue)
+
         }
     }
     
-    var emailField: some View {
-        VStack(alignment: .leading){
-            Text(mailFieldText)
-                .inputLabel()
-            TextField(mailFieldText, text: $email)
-                .disableAutocorrection(true)
-                .autocapitalization(.none)
-                .padding(.leading, Pad.medium.rawValue)
-        }
-        .padding(.top, Pad.large1.rawValue)
-    }
-    
-    func passwordField(_ placeHolder: String, text: Binding<String>) -> some View {
-        VStack(alignment: .leading){
-            Text(placeHolder)
-                .inputLabel()
-            SecureField(placeHolder, text: text)
-                .padding(.leading, Pad.medium.rawValue)
-        }
-    }
-    
+    //MARK: - Text
     let navBarTitle = "With E-mail"
     let mailFieldText  = "E-mail"
     let pswrdText = "Password"

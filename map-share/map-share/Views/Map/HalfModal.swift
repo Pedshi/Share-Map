@@ -8,19 +8,14 @@
 import SwiftUI
 
 struct HalfModal: View{
-    @GestureState var gestureClose : CGFloat = 0.0
     
+    //MARK: - Variables
     @Binding var visible : Bool
     @Binding var place : Place
     var offset : CGFloat
-    private var height : CGFloat {
-        maxHeight - gestureClose
-    }
     
-    var currentDay : String {
-        let day = Date().get(.weekday)
-        return Date.weekDayList[day-1]
-    }
+    //MARK: - Components
+    let closeButtonLabel = TokenButtonLabel(systemName: "xmark.circle.fill", iconSize: .large)
     
     init(visible: Binding<Bool>, place: Binding<Place>, offset: CGFloat){
         self._visible = visible
@@ -36,15 +31,13 @@ struct HalfModal: View{
                 VStack{
                     Handlebar()
                     HStack(alignment: .top){
-                        VStack(alignment: .leading, spacing: Pad.small.rawValue){
+                        VStack(alignment: .leading, spacing: Space.times1.rawValue){
                             Text(place.name)
                                 .font(.headline)
                             Text(place.address)
                                 .font(.footnote)
                                 .foregroundColor(.secondary)
-                            Text(
-                                place.openingHours[currentDay] ?? ""
-                            )
+                            Text( place.openingHours[currentDay] ?? "" )
                         }
                         
                         Spacer()
@@ -52,13 +45,11 @@ struct HalfModal: View{
                         Button(action: {
                             visible = false
                         }, label: {
-                            Image(systemName: "xmark.circle.fill")
-                                .foregroundColor(.secondary)
-                                .imageScale(.large)
-                                .frame(width: 44, height: 44, alignment: .topTrailing)
+                            closeButtonLabel
+                                .frame(width: minButtonSize, height: minButtonSize, alignment: .topTrailing)
                         })
                     }
-                    .padding(Pad.medium.rawValue)
+                    .padding(Space.times2.rawValue)
                 }
             }
             .frame(maxWidth: .infinity, minHeight: 0, maxHeight: maxHeight, alignment: .bottom)
@@ -66,15 +57,24 @@ struct HalfModal: View{
             .gesture(closeGesture())
             .transition(.move(edge: .bottom))
             .animation(.easeInOut(duration: AnimationDurr.short.rawValue))
-            .onChange(of: self.place, perform: {place in
-                self.place.deselect()
-            })
-            .onDisappear{
-                self.place.deselect()
-            }
+            .onChange(of: self.place){ place in self.place.deselect() }
+            .onDisappear{ self.place.deselect() }
         }else{
             EmptyView()
         }
+    }
+    
+    var currentDay : String {
+        let day = Date().get(.weekday)
+        return Date.weekDayList[day-1]
+    }
+    
+    //MARK: - Gestures
+    
+    @GestureState var gestureClose : CGFloat = 0.0
+    
+    private var height : CGFloat {
+        maxHeight - gestureClose
     }
     
     private func closeGesture() -> some Gesture {
@@ -91,8 +91,9 @@ struct HalfModal: View{
             }
     }
     
-    private let minCloseGesture : CGFloat = 40
-    private let maxHeight : CGFloat = 280
+    let minCloseGesture : CGFloat = 40
+    let maxHeight : CGFloat = 280
+    let minButtonSize: CGFloat = 44
 }
 
 

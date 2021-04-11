@@ -9,14 +9,15 @@ import MapKit
 import CoreLocation
 
 struct MapWithMarkers: View {
-    @State private var markers : [Place]
     
-    @State private var showDetail = false
-    
+    //Default map settings
     @EnvironmentObject var viewModel : MapViewModel
     @State private var tracking : MapUserTrackingMode = .none
     @State private var region = MKCoordinateRegion(center: MapWithMarkers.defaultLocation, span: MapWithMarkers.defaultSpan)
     
+    //MARK: - Variables
+    @State private var markers : [Place]
+    @State private var showDetail = false
     @ObservedObject private var location = LocationManager()
     @State private var manager = CLLocationManager()
     @State var chosenIndex: Int?
@@ -37,13 +38,13 @@ struct MapWithMarkers: View {
                     
                     MapAnnotation(coordinate: marker.coord){
                         Image(uiImage: UIImage(named: pin(for: marker.category), in: nil, with: calculatorSymbolConfig)!)
-                            .frame(width: 44, height: 44, alignment: .topTrailing) //Difficult to tap closeby pins
+                            .frame(width: minButtonSize, height: minButtonSize, alignment: .topTrailing)
                             .onTapGesture {
                                 showDetail = true
                                 chosenIndex = markers.firstIndex(where: {$0.id == marker.id })
                                 markers[chosenIndex!].select()
                             }
-                            .scaleEffect( marker.isSelected ? 1.3 : 1)
+                            .scaleEffect( marker.isSelected ? zoomScale : 1)
                             .animation(.easeInOut(duration: AnimationDurr.short.rawValue))
                     }
                 }
@@ -70,13 +71,6 @@ struct MapWithMarkers: View {
         .ignoresSafeArea()
     }
     
-    static let defaultLocation = CLLocationCoordinate2D(
-        latitude: 59.2123744651292,
-        longitude: 18.074693826274057
-    )
-    static let defaultSpan = MKCoordinateSpan(latitudeDelta: 15.0, longitudeDelta: 15.0)
-    let calculatorSymbolConfig = UIImage.SymbolConfiguration(pointSize: 24.0, weight: .regular, scale: .large)
-    
     func pin(for categories: [Int]) -> String {
         guard 0 < categories.count else { return "defaultpin" }
         switch categories[0] {
@@ -92,5 +86,16 @@ struct MapWithMarkers: View {
             return "defaultpin"
         }
     }
+    
+    //MARK: - static local variables
+    static let defaultLocation = CLLocationCoordinate2D(
+        latitude: 59.2123744651292,
+        longitude: 18.074693826274057
+    )
+    static let defaultSpan = MKCoordinateSpan(latitudeDelta: 15.0, longitudeDelta: 15.0)
+    let calculatorSymbolConfig = UIImage.SymbolConfiguration(pointSize: 24.0, weight: .regular, scale: .large)
+    let zoomScale: CGFloat = 1.3
+    let minButtonSize: CGFloat = 44
+    
 }
 

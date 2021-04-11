@@ -58,20 +58,26 @@ struct LoginView: View {
 }
 
 struct LoginForm: View{
+    
     @EnvironmentObject var viewModel : LoginViewModel
 
+    //MARK: - Variables
     @State private var email = ""
     @State private var password = ""
     @State var goToHomePage : Bool
     @State private var showRegister : Bool = false
     
+    //MARK: - COMPONENTS
+    var signInButton = TokenButton(capsuleText: "Sign In", size: .medium)
+    var registerLink = TokenButton(linkText: "Register")
+    
     var body: some View{
         GeometryReader{ geometry in
             ZStack{
                 VStack{
-                    Image("reading-by-tree")
-                        .fitResize(height: geometry.size.height * 0.4)
-                        .padding(.vertical, geometry.size.height * 0.05)
+                    Image(TokenImageName.reading.rawValue)
+                        .fitResize(height: geometry.size.height * Layout.eightTwentieths.rawValue)
+                        .padding(.vertical, geometry.size.height * Layout.oneTwentieth.rawValue)
                     signInForm(size: geometry.size)
                 }
                 .padding()
@@ -82,37 +88,37 @@ struct LoginForm: View{
     }
     
     func signInForm(size: CGSize) -> some View {
-        VStack(spacing: VSpace.small.rawValue){
+        VStack(spacing: Space.times3.rawValue){
             TextField(emailText, text: $email)
-                .disableAutocorrection(true)
-                .autocapitalization(.none)
                 .accessibility(identifier: "loginEmailField")
             
             SecureField(pswrdText, text: $password)
                 .accessibility(identifier: "loginPasswordField")
 
-            Button("Sign In"){
+            Button(action: {
                 viewModel.send(event: .onLoginReq(
                                 email: email.lowercased(),
                                 password: password)
                 )
-            }
-            .buttonStyle(ActionButton(width: 210))
+            }){ signInButton.buttonLabel }
+                .buttonStyle(signInButton.buttonStyle)
             
             HStack{
-                Text("Don't have an account?")
-                Button("Register", action: {
+                Text(createAccountText)
+                Button(action: {
                     showRegister = true
-                })
+                }){ registerLink.buttonLabel }
+                    .buttonStyle(registerLink.buttonStyle)
             }
         }
-        .textFieldStyle(SingleTextFieldStyle(width: size.width * 0.75))
+        .textFieldStyle(TokenTextFieldStyle(width: size.width * Layout.threeQuarters.rawValue))
     }
     
+    //MARK: - Texts
     let emailText = "E-mail"
     let pswrdText = "Password"
+    let createAccountText = "Don't Have an account?"
 }
-
 
 
 struct LoginView_Previews: PreviewProvider {
