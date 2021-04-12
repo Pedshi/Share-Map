@@ -90,6 +90,7 @@ extension Endpoints where Kind == RequestType.Public,
 extension Endpoints where Kind == RequestType.Public,
                           Method == RequestMethod.Post {
     static var login = Endpoints(path: "anvandare/loggain", queryItems: [])
+    static var register = Endpoints(path: "anvandare/register", queryItems: [])
 }
 
 extension Endpoints where Kind == RequestType.Private,

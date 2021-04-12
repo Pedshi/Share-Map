@@ -27,7 +27,7 @@ struct LoginView: View {
             spinner
         case .authenticated:
             goToHomeView
-        case .loggingIn:
+        case .loggingIn, .register:
             spinner
         case .loginFail:
             Text("LOGIN FAILED")
@@ -82,7 +82,7 @@ struct LoginForm: View{
                 }
                 .padding()
                 .fullScreen(alignment: .top)
-                .sheet(isPresented: $showRegister){ RegisterView() }
+                .sheet(isPresented: $showRegister){ RegisterView().environmentObject(viewModel) }
             }
         }
     }
@@ -91,15 +91,14 @@ struct LoginForm: View{
         VStack(spacing: Space.times3.rawValue){
             TextField(emailText, text: $email)
                 .accessibility(identifier: "loginEmailField")
-            
             SecureField(pswrdText, text: $password)
                 .accessibility(identifier: "loginPasswordField")
 
             Button(action: {
                 viewModel.send(event: .onLoginReq(
                                 email: email.lowercased(),
-                                password: password)
-                )
+                                password: password
+                ))
             }){ signInButton.buttonLabel }
                 .buttonStyle(signInButton.buttonStyle)
             

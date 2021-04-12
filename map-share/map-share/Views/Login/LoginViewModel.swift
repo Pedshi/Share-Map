@@ -26,6 +26,7 @@ class LoginViewModel : ObservableObject{
                 Self.whenAuthenticating(),
                 Self.whenLoggingIn(),
                 Self.whenRefreshToken(),
+                Self.whenRegistering(),
                 Self.userInput(input: input.eraseToAnyPublisher())
             ]
         )
@@ -49,18 +50,27 @@ extension LoginViewModel {
         case authenticating
         case authenticated
         case refreshingToken
+        
         case idle
+        
         case loggingIn(String, String)
         case loginFail(Error)
+        
+        case register(String, String)
     }
     
     enum Event {
         case onAuthSuccess
         case onAuthFail(Error)
         case onRefreshToken
+        
         case onLoginReq(email: String, password: String)
         case onLoginSuccess
         case onLoginFail(Error)
+        
+        case onRegisterReq(email: String, password: String)
+        case onRegisterSuccess
+        case onRegisterFail(Error)
     }
 }
 
@@ -83,6 +93,19 @@ extension LoginViewModel {
         case .loggingIn:
             return reduceLoggingIn(state: state, event: event)
         case .loginFail:
+            return .idle
+        case .register:
+            return reduceRegister(state: state, event: event)
+        }
+    }
+    
+    static func reduceRegister(state: State, event: Event) -> State {
+        switch event {
+        case .onRegisterSuccess:
+            return .idle // SHOULD GO TO HOME SCREEN INSTEAD
+        case let .onRegisterFail(error):
+            return .loginFail(error)
+        default:
             return .idle
         }
     }
@@ -113,6 +136,8 @@ extension LoginViewModel {
         switch event {
         case let .onLoginReq(email, password):
             return .loggingIn(email, password)
+        case let .onRegisterReq(email, password):
+            return .register(email, password)
         default:
             return state
         }
@@ -130,6 +155,17 @@ extension LoginViewModel {
     }
     
     // MARK: - Feedback
+    
+    static func whenRegistering() -> Feedback<State, Event>{
+        Feedback { (state: State) -> AnyPublisher<Event, Never> in
+            guard case let .register(email, password) = state else { return Empty().eraseToAnyPublisher() }
+            
+            return API.User.registerRequest(email: email, password: password)
+                .map{ Event.onRegisterSuccess }
+                .catch{ Just(Event.onRegisterFail($0)) }
+                .eraseToAnyPublisher()
+        }
+    }
     
     static func whenAuthenticating() -> Feedback<State, Event>{
         Feedback { (state: State) -> AnyPublisher<Event, Never> in

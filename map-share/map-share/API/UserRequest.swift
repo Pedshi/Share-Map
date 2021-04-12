@@ -33,6 +33,19 @@ extension API {
                 .eraseToAnyPublisher()
         }
         
+        static func registerRequest(email: String,
+                                    password: String,
+                                    session: URLSession = .shared,
+                                    KCManager: KeyChainManagerProtocol.Type = KeyChainManager.self) -> AnyPublisher<Void, Error>{
+            let jsonData = UserRequest.requestBody(email: email, password: password)
+            let request = Endpoints.register.build(authData: nil, bodyData: jsonData)!
+            
+            return session.dataTaskPublisher(for: request)
+                .validateResponse()
+                .map{ _ in }
+                .eraseToAnyPublisher()
+        }
+        
         static func validateTokenRequest(email: String, token: String, session: URLSession = .shared) -> AnyPublisher<Void, Error>{
             let jsonData = UserRequest.requestBody(email: email)
             let request = Endpoints.validateToken.build(authData: token, bodyData: jsonData)!

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct RegisterView: View {
     
+    @EnvironmentObject var viewModel : LoginViewModel
+    
     //MARK: - COMPONENTS
     var registerButton = TokenButton(
         capsuleText: "Register with E-mail",
@@ -25,7 +27,7 @@ struct RegisterView: View {
                             .padding(.top, geometry.size.height * Layout.oneTwentieth.rawValue)
 
                         VStack{
-                            NavigationLink(destination: FormView()){
+                            NavigationLink(destination: FormView().environmentObject(viewModel)){
                                 registerButton.buttonLabel
                             }
                             .buttonStyle(registerButton.buttonStyle)
