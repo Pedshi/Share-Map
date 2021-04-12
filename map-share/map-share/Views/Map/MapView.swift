@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MapView: View {
     @ObservedObject var viewModel : MapViewModel
-    @State private var alert = true 
     
     var body: some View {
         content()
@@ -25,7 +24,7 @@ struct MapView: View {
             MapWithMarkers(markers: places)
                 .environmentObject(viewModel)
         case .loadingFailed:
-            loadingFailed()
+            loadingFailed
         }
     }
     
@@ -33,7 +32,7 @@ struct MapView: View {
         ProgressView()
     }
     
-    func loadingFailed() -> some View {
+    private var loadingFailed: some View {
         VStack{
             Image(systemName: "wifi.slash")
                 .foregroundColor(.secondary)

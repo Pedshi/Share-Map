@@ -30,10 +30,19 @@ struct LoginView: View {
         case .loggingIn, .register:
             spinner
         case .loginFail:
-            Text("LOGIN FAILED")
-        case .idle:
-            LoginForm(goToHomePage: false)
-                    .environmentObject(viewModel)
+            LoginForm(
+                goToHomePage: false,
+                registerSuccess: true,
+                alertView: loginFailedAlert
+            )
+                .environmentObject(viewModel)
+        case let .idle(registerAlert):
+            LoginForm(
+                goToHomePage: false,
+                registerSuccess: registerAlert,
+                alertView: registerSuccessAlert
+            )
+                .environmentObject(viewModel)
         case .refreshingToken:
             spinner
         }
@@ -41,6 +50,17 @@ struct LoginView: View {
     
     private var spinner: some View {
         ProgressView()
+    }
+    
+    private var registerSuccessAlert: Alert {
+        Alert(title: Text(successAlertText), dismissButton: .default(Text(dismissAlertText)))
+    }
+    
+    private var loginFailedAlert: Alert {
+        Alert(
+            title: Text(loginFailText),
+            dismissButton: .default(Text(dismissAlertText), action: { viewModel.send(event: .onDismissAlert) })
+        )
     }
     
     private var goToHomeView: some View {
@@ -55,6 +75,11 @@ struct LoginView: View {
         }
     }
     
+    //MARK: - Texts
+    let successAlertText = "Succefully registered account 🎉"
+    let loginFailText = "Login with provided credentials failed!"
+    let dismissAlertText = "OK"
+    
 }
 
 struct LoginForm: View{
@@ -65,7 +90,9 @@ struct LoginForm: View{
     @State private var email = ""
     @State private var password = ""
     @State var goToHomePage : Bool
+    @State var registerSuccess: Bool
     @State private var showRegister : Bool = false
+    var alertView: Alert
     
     //MARK: - COMPONENTS
     var signInButton = TokenButton(capsuleText: "Sign In", size: .medium)
@@ -83,7 +110,7 @@ struct LoginForm: View{
                 .padding()
                 .fullScreen(alignment: .top)
                 .sheet(isPresented: $showRegister){ RegisterView().environmentObject(viewModel) }
-            }
+            }.alert(isPresented: $registerSuccess){ alertView }
         }
     }
     

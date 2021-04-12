@@ -51,7 +51,7 @@ extension LoginViewModel {
         case authenticated
         case refreshingToken
         
-        case idle
+        case idle(Bool)
         
         case loggingIn(String, String)
         case loginFail(Error)
@@ -71,6 +71,8 @@ extension LoginViewModel {
         case onRegisterReq(email: String, password: String)
         case onRegisterSuccess
         case onRegisterFail(Error)
+        
+        case onDismissAlert
     }
 }
 
@@ -93,7 +95,7 @@ extension LoginViewModel {
         case .loggingIn:
             return reduceLoggingIn(state: state, event: event)
         case .loginFail:
-            return .idle
+            return .idle(false)
         case .register:
             return reduceRegister(state: state, event: event)
         }
@@ -102,11 +104,11 @@ extension LoginViewModel {
     static func reduceRegister(state: State, event: Event) -> State {
         switch event {
         case .onRegisterSuccess:
-            return .idle // SHOULD GO TO HOME SCREEN INSTEAD
+            return .idle(true) // SHOULD GO TO HOME SCREEN INSTEAD
         case let .onRegisterFail(error):
             return .loginFail(error)
         default:
-            return .idle
+            return .idle(false)
         }
     }
     
@@ -115,7 +117,7 @@ extension LoginViewModel {
         case .onAuthSuccess:
             return.authenticated
         default:
-            return .idle
+            return .idle(false)
         }
     }
     
@@ -124,7 +126,7 @@ extension LoginViewModel {
         case .onAuthSuccess:
             return .authenticated
         case .onAuthFail:
-            return .idle
+            return .idle(false)
         case .onRefreshToken:
             return .refreshingToken
         default:
