@@ -57,6 +57,7 @@ extension LoginViewModel {
         case loginFail(Error)
         
         case register(String, String)
+        case registerFail
     }
     
     enum Event {
@@ -96,6 +97,8 @@ extension LoginViewModel {
             return reduceLoggingIn(state: state, event: event)
         case .loginFail:
             return .idle(false)
+        case .registerFail:
+            return .idle(false)
         case .register:
             return reduceRegister(state: state, event: event)
         }
@@ -104,9 +107,9 @@ extension LoginViewModel {
     static func reduceRegister(state: State, event: Event) -> State {
         switch event {
         case .onRegisterSuccess:
-            return .idle(true) // SHOULD GO TO HOME SCREEN INSTEAD
-        case let .onRegisterFail(error):
-            return .loginFail(error)
+            return .idle(true)
+        case .onRegisterFail:
+            return .registerFail
         default:
             return .idle(false)
         }

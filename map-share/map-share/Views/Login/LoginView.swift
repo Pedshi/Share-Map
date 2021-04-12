@@ -33,14 +33,21 @@ struct LoginView: View {
             LoginForm(
                 goToHomePage: false,
                 registerSuccess: true,
-                alertView: loginFailedAlert
+                alertView: alertWith(title: loginFailText, button: dismissWithStateButton)
+            )
+                .environmentObject(viewModel)
+        case .registerFail:
+            LoginForm(
+                goToHomePage: false,
+                registerSuccess: true,
+                alertView: alertWith(title: registerFailText, button: dismissWithStateButton)
             )
                 .environmentObject(viewModel)
         case let .idle(registerAlert):
             LoginForm(
                 goToHomePage: false,
                 registerSuccess: registerAlert,
-                alertView: registerSuccessAlert
+                alertView: alertWith(title: successAlertText, button: dismissButton)
             )
                 .environmentObject(viewModel)
         case .refreshingToken:
@@ -52,15 +59,16 @@ struct LoginView: View {
         ProgressView()
     }
     
-    private var registerSuccessAlert: Alert {
-        Alert(title: Text(successAlertText), dismissButton: .default(Text(dismissAlertText)))
+    private var dismissButton: Alert.Button {
+        Alert.Button.default(Text(dismissAlertText))
     }
     
-    private var loginFailedAlert: Alert {
-        Alert(
-            title: Text(loginFailText),
-            dismissButton: .default(Text(dismissAlertText), action: { viewModel.send(event: .onDismissAlert) })
-        )
+    private var dismissWithStateButton: Alert.Button {
+        Alert.Button.default(Text(dismissAlertText), action: { viewModel.send(event: .onDismissAlert) })
+    }
+    
+    func alertWith(title: String, button: Alert.Button) -> Alert{
+        Alert(title: Text(title), dismissButton: button)
     }
     
     private var goToHomeView: some View {
@@ -78,6 +86,7 @@ struct LoginView: View {
     //MARK: - Texts
     let successAlertText = "Succefully registered account 🎉"
     let loginFailText = "Login with provided credentials failed!"
+    let registerFailText = "Registeration failed!"
     let dismissAlertText = "OK"
     
 }
