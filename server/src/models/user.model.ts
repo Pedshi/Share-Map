@@ -1,21 +1,21 @@
 import { model, Schema, Document } from 'mongoose';
 
-interface IUser{
+interface IUserKeys{
   email: {type:String, required: true, unique:true};
   password: {type:String, required: true};
-  isAdmin: {type:Boolean, required:true, default:false};
-  token: {type:String};
+  isAdmin?: {type:Boolean, required:true, default:false};
+  token?: {type:String};
 };
 
-interface IUserDoc extends IUser, Document {};
+interface IUser extends IUserKeys, Document {};
 
-const userSchemaFields: Record<keyof IUser, any> = {
+const userSchemaFields: Record<keyof IUserKeys, any> = {
   email: {type:String, required: true, unique:true},
   password: {type:String, required: true},
   isAdmin: {type:Boolean, required:true, default:false},
   token: {type:String}
 };
-const userSchema = new Schema({userSchemaFields});
+const userSchema = new Schema(userSchemaFields);
 
-const User = model<IUserDoc>('User', userSchema);
+const User = model<IUser>('User', userSchema);
 export { IUser, User }

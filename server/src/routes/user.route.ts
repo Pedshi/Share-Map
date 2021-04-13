@@ -1,11 +1,21 @@
 import express from 'express';
-import { User, IUser } from '../models/user.model';
+import UserController from '../controllers/user.controller';
 
 const userRouter = express.Router();
 
-userRouter.get('/', (request, result) => {
-  
-  result.send('USER');
+userRouter.get('/', async (request, result) => {
+  const users = await UserController.getUsers()
+    .catch( err => { console.log(err) })
+  result.send(users);
+});
+
+userRouter.post('/create', async (req, res) => {
+  const user = await UserController.createUser({
+    email: req.body.email,
+    password: req.body.password
+  })
+    .catch( err => { console.log(err); });
+  res.send(user);
 });
 
 export default userRouter
