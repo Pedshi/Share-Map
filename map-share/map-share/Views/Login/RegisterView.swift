@@ -24,15 +24,23 @@ struct RegisterView: View {
                     VStack(spacing: geometry.size.height * Layout.oneTwentieth.rawValue){
                         Image("standing")
                             .fitResize(height: geometry.size.height * Layout.oneHalf.rawValue)
-                            .padding(.top, geometry.size.height * Layout.oneTwentieth.rawValue)
 
                         VStack{
                             NavigationLink(destination: FormView().environmentObject(viewModel)){
                                 registerButton.buttonLabel
                             }
                             .buttonStyle(registerButton.buttonStyle)
-                        }.frame(width: 100, height: 100, alignment: .center) //reported SwiftUI bug
-                        
+                            
+                            Button(action: {}, label: {
+                                 Text("Sign in with Apple")
+                                     .fontWeight(.semibold)
+                                     .padding(.vertical, 20)
+                                     .padding(.horizontal, 90)
+                                     .background(Color.black)
+                                     .foregroundColor(.white)
+                                     .cornerRadius(30)
+                             })
+                        }  
                     }
                 }
                 .navigationBarTitle(pageTitle)
