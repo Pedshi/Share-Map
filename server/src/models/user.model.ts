@@ -27,15 +27,27 @@ interface IUser extends Document {
  Schema
 */
 const userSchemaFields: Record<keyof IUserKeys, any> = {
-  email: {type:String, required: true, unique:true},
-  password: {type:String, required: true},
-  isAdmin: {type:Boolean, required:true, default:false},
-  token: {type:String}
+  email: {
+    type: String, 
+    required: [true, 'Missing Email address'], 
+    unique: true, 
+    lowercase: true
+  },
+  password: {
+    type: String, 
+    required: [true, 'Missing Password'],
+  },
+  isAdmin: {
+    type: Boolean, 
+    required: true, 
+    default: false
+  },
+  token: String
 };
 const userSchema = new Schema(userSchemaFields);
 
 /*
- Static & methods
+ Statics & methods
 */
 userSchema.methods.hashPassword = async function(password: string): Promise<string> {
   const salt = await bcrypt.genSalt();
