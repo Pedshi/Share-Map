@@ -10,12 +10,18 @@ userRouter.get('/', async (request, result) => {
 });
 
 userRouter.post('/create', async (req, res) => {
-  const user = await UserController.createUser({
-    email: req.body.email,
-    password: req.body.password
-  })
-    .catch( err => { console.log(err); });
-  res.send(user);
+  try{
+    const user = await UserController.createUser(req);
+    const uiUser = {
+      id: user.id,
+      email: user.email,
+      token: user.token
+    };
+    res.status(201).send(uiUser);
+  }catch(error){
+    console.log(`Error creating user: ${error}`);
+    res.status(404).send('Failed to create user');
+  }
 });
 
 export default userRouter
