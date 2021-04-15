@@ -8,7 +8,7 @@ const userRouter = express.Router();
 enum UserPaths {
   signUp = '/signup',
   login = '/login',
-  refreshToken = '/refreshtoken',
+  authenticateToken = '/auth',
   addPlace = '/place/:placeId',
   getPlaces = '/place'
 }
@@ -39,7 +39,7 @@ const loginCB = async (req: Request, res: Response, next: NextFunction) => {
 
 userRouter.post(UserPaths.login, loginCB);
 
-const refreshTokenCB = async (req: Request<authMiddlewareParams>, res: Response, next: NextFunction) => {
+const authenticateTokenCB = async (req: Request<authMiddlewareParams>, res: Response, next: NextFunction) => {
   const {email} = req.body;
   if( !email || email == '')
     next( new Error('Email needed') );
@@ -48,7 +48,7 @@ const refreshTokenCB = async (req: Request<authMiddlewareParams>, res: Response,
   next( new Error('Not authorized') );
 };
 
-userRouter.get(UserPaths.refreshToken, authenticateUserToken , refreshTokenCB);
+userRouter.get(UserPaths.authenticateToken, authenticateUserToken , authenticateTokenCB);
 
 interface addPlaceParams extends authMiddlewareParams{
   placeId: string;
