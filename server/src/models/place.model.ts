@@ -13,8 +13,7 @@ interface IOpeninHours {
   sun : {type: String, required: true};
 }
 
-interface IPlace {
-  owner: {type: String, required: true},
+interface IPlaceKeys {
   name: {type: String, required: true},
   address: {type: String, required: true},
   latitude: {type: Number, required: true},
@@ -24,7 +23,15 @@ interface IPlace {
   category: {type: Number}
 };
 
-interface IPlaceDoc extends IPlace, Document {};
+interface IPlace extends Document {
+  name: string,
+  address: string,
+  latitude: number,
+  longitude: number,
+  igLocationUrl: string,
+  openingHours: IOpeninHours,
+  category: number
+};
 
 /* 
   Schemas 
@@ -40,17 +47,28 @@ const openingHoursFields: Record<keyof IOpeninHours, any> = {
 };
 const openingHoursSchema = new Schema(openingHoursFields);
 
-const placeSchemaFields: Record<keyof IPlace, any> = {
-  owner: {type: String, required: true},
-  name: {type: String, required: true},
-  address: {type: String, required: true},
-  latitude: {type: Number, required: true},
-  longitude: {type: Number, required: true},
+const placeSchemaFields: Record<keyof IPlaceKeys, any> = {
+  name: {
+    type: String, 
+    required: [true, 'Missing name of Place']
+  },
+  address: {
+    type: String, 
+    required: [true, 'Missing address']
+  },
+  latitude: {
+    type: Number, 
+    required: [true, 'Missing latitude']
+  },
+  longitude: {
+    type: Number, 
+    required: [true, 'Missing longitude']
+  },
   igLocationUrl: {type: String},
   openingHours: openingHoursSchema,
   category: {type: Number}
 };
 const placeSchema = new Schema(placeSchemaFields);
 
-const Place = model<IPlaceDoc>("Place", placeSchema);
+const Place = model<IPlace>("Place", placeSchema);
 export { IPlace, Place };

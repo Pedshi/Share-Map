@@ -1,17 +1,17 @@
-import express, { NextFunction } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import UserController from '../controllers/user.controller';
 import { Error } from 'mongoose';
 import { authMiddlewareParams, authenticateUserToken } from '../middlewares/auth.middleware';
 
 const userRouter = express.Router();
 
-userRouter.get('/', async (request, result) => {
-  const users = await UserController.getUsers()
-    .catch( err => { console.log(err) })
-  result.send(users);
-});
+enum UserPaths {
+  signUp = '/signup',
+  login = '/login',
+  refreshToken = '/refreshtoken'
+}
 
-userRouter.post('/signup', async (req, res, next) => {
+const signUpCB = async (req: Request, res: Response, next: NextFunction) => {
   try{
     const user = await UserController.createUser(req);
     const uiUser = {
@@ -21,9 +21,11 @@ userRouter.post('/signup', async (req, res, next) => {
     };
     res.status(201).send(uiUser);
   }catch(error){ next(error); }
-});
+};
 
-userRouter.post('/login', async (req, res, next) => {
+userRouter.post(UserPaths.signUp, signUpCB);
+
+const loginCB = async (req: Request, res: Response, next: NextFunction) => {
   const {email, password} = req.body;
   if( !email || !password)
     return next(new Error('Empty Fields'));
@@ -31,9 +33,11 @@ userRouter.post('/login', async (req, res, next) => {
     const token = await UserController.login({email, password});
     res.cookie('_t', token, {httpOnly: true}).sendStatus(200);
   }catch(error){ next(error); }
-});
+};
 
-const refreshTokenCB = async (req: express.Request<authMiddlewareParams>, res: express.Response, next: NextFunction) => {
+userRouter.post(UserPaths.login, loginCB);
+
+const refreshTokenCB = async (req: Request<authMiddlewareParams>, res: Response, next: NextFunction) => {
   const {email} = req.body;
   if( !email || email == '')
     next( new Error('Email needed') );
@@ -42,6 +46,6 @@ const refreshTokenCB = async (req: express.Request<authMiddlewareParams>, res: e
   next( new Error('Not authorized') );
 };
 
-userRouter.get('/refreshtoken', authenticateUserToken ,refreshTokenCB);
+userRouter.get(UserPaths.refreshToken, authenticateUserToken ,refreshTokenCB);
 
 export default userRouter

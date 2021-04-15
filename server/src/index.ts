@@ -1,10 +1,11 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
-import userRouter from './routes/user.route';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import connect from './connect';
 import errorMiddleware from './middlewares/error.middleware';
+import userRouter from './routes/user.route';
+import placeRouter from './routes/place.route';
 dotenv.config();
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use('/api/user', userRouter);
+app.use('/api/place', placeRouter);
 
 app.use(errorMiddleware);
 connect(uri)

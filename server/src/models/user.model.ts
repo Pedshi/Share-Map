@@ -1,23 +1,29 @@
-import mongoose,{ model, Schema, Document, Model } from 'mongoose';
+import mongoose,{ model, Schema, Document, Model, Types } from 'mongoose';
 import jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
+import { IPlace } from '../models/place.model';
 dotenv.config();
 
 /*
   Interface
 */
+
+type ID = Types.ObjectId;
+
 interface IUserKeys{
-  email: {type:String, required: true, unique:true};
-  password: {type:String, required: true};
-  isAdmin?: {type:Boolean, required:true, default:false};
-  token?: {type:String};
+  email: string;
+  password: string;
+  isAdmin?: boolean;
+  places?: ID | IPlace[];
+  token?: string;
 };
 
 interface IUser extends Document {
   email: string;
   password: string;
   isAdmin?: boolean;
+  places?: ID[] | IPlace[];
   token?: string;
   hashPassword(password: string): Promise<string>;
   generateAuthToken(): Promise<string>;
@@ -46,6 +52,10 @@ const userSchemaFields: Record<keyof IUserKeys, any> = {
     required: true, 
     default: false
   },
+  places: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Place'
+  }],
   token: String
 };
 const userSchema = new Schema(userSchemaFields);
