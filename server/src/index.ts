@@ -2,6 +2,7 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import userRouter from './routes/user.route';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import connect from './connect';
 import errorMiddleware from './middlewares/error.middleware';
 dotenv.config();
@@ -11,6 +12,7 @@ const PORT: number = process.env.PORT ? parseInt(process.env.PORT): 3001;
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_SERVER}`;
 
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use('/api/user', userRouter);
 

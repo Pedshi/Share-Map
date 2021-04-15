@@ -1,4 +1,4 @@
-import { model, Schema, Document } from 'mongoose';
+import mongoose,{ model, Schema, Document, Model } from 'mongoose';
 import jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
@@ -20,8 +20,12 @@ interface IUser extends Document {
   isAdmin?: boolean;
   token?: string;
   hashPassword(password: string): Promise<string>;
-  generateAuthToken(): string;
+  generateAuthToken(): Promise<string>;
 };
+
+interface IUserModel extends Model<IUser> {
+  findByCredentials(email: string, password: string): Promise<IUser>;
+}
 
 /*
  Schema
@@ -49,16 +53,28 @@ const userSchema = new Schema(userSchemaFields);
 /*
  Statics & methods
 */
+userSchema.statics.findByCredentials = async function(email: string, password: string): Promise<IUser> {
+  const user = await User.findOne({email: email});
+  if (user){
+    const isPasswordMatch = await bcrypt.compare(password, user!.password);
+    if(isPasswordMatch)
+      return user;
+  }
+  throw new mongoose.Error('Login Failed');
+};
+
 userSchema.methods.hashPassword = async function(password: string): Promise<string> {
   const salt = await bcrypt.genSalt();
   return await bcrypt.hash(password, salt);
 };
 
-userSchema.methods.generateAuthToken = function(){
-  const user = this;
+userSchema.methods.generateAuthToken = async function(): Promise<string>{
+  const user = this as IUser;
   const newToken = jwt.sign({_id: user._id}, process.env.JWT_KEY!, {expiresIn: '7d'});
+  user.token = newToken;
+  await user.save();
   return newToken;
-}
+};
 
 userSchema.pre<IUser>('save', async function(next) {
   const user = this;
@@ -70,6 +86,5 @@ userSchema.pre<IUser>('save', async function(next) {
   }
 });
 
-
-const User = model<IUser>('User', userSchema);
+const User = model<IUser, IUserModel>('User', userSchema);
 export { IUser, User }
