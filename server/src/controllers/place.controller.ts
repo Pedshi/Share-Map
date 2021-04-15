@@ -9,6 +9,13 @@ async function create(req: Request<authMiddlewareParams>): Promise<IPlace>{
       .catch( (error: Error) => { throw error; } );
 };
 
+async function getAll(): Promise<IPlace[]> {
+  return Place.find().exec()
+    .then( (data: IPlace[]) => data )
+    .catch( (error: Error) => { throw error; } );
+}
+
 export default {
-  create
+  create,
+  getAll
 }

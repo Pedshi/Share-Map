@@ -5,7 +5,8 @@ import PlaceController from '../controllers/place.controller';
 const placeRouter = Router();
 
 enum PlacePaths {
-  create = '/'
+  create = '/',
+  getAll = '/'
 }
 
 const createCB = async (req: Request<authMiddlewareParams>, res: Response, next: NextFunction) => {
@@ -17,6 +18,13 @@ const createCB = async (req: Request<authMiddlewareParams>, res: Response, next:
 
 placeRouter.post(PlacePaths.create, authenticateUserToken, createCB);
 
+const getAllCB = async (req: Request, res: Response, next: NextFunction) => {
+  try{
+    const places = await PlaceController.getAll();
+    res.send(places);
+  }catch(error) { next(error) }
+};
 
+placeRouter.get(PlacePaths.getAll, getAllCB);
 
 export default placeRouter;

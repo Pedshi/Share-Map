@@ -4,6 +4,7 @@ export default ( (uri: string) => {
   const connect = () => {
     mongoose.connect(uri, { 
       useNewUrlParser: true,
+      useFindAndModify: false,
       useUnifiedTopology: true
     })
       .then( _ => { console.log('Connected succefully') } )

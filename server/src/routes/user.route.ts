@@ -8,7 +8,9 @@ const userRouter = express.Router();
 enum UserPaths {
   signUp = '/signup',
   login = '/login',
-  refreshToken = '/refreshtoken'
+  refreshToken = '/refreshtoken',
+  addPlace = '/place/:placeId',
+  getPlaces = '/place'
 }
 
 const signUpCB = async (req: Request, res: Response, next: NextFunction) => {
@@ -46,6 +48,32 @@ const refreshTokenCB = async (req: Request<authMiddlewareParams>, res: Response,
   next( new Error('Not authorized') );
 };
 
-userRouter.get(UserPaths.refreshToken, authenticateUserToken ,refreshTokenCB);
+userRouter.get(UserPaths.refreshToken, authenticateUserToken , refreshTokenCB);
+
+interface addPlaceParams extends authMiddlewareParams{
+  placeId: string;
+}
+
+const addPlaceCB = async (req: Request<addPlaceParams>, res: Response, next: NextFunction) => {
+  try{
+    const user = await UserController.addPlace(req.params.user.id, req.params.placeId);
+    if(!user)
+      return res.status(404).send('User does not exist');
+    return res.sendStatus(200);
+  }catch(error) { next(error) }
+};
+
+userRouter.put(UserPaths.addPlace, authenticateUserToken, addPlaceCB);
+
+const getPlacesCB = async (req: Request<authMiddlewareParams>, res: Response, next: NextFunction) => {
+  try{
+    const places = await UserController.getPlaces(req.params.user.id!);
+    if(!places)
+      return res.status(404).send('No places to show');
+    return res.send(places);
+  }catch(error) { throw error }
+};
+
+userRouter.get(UserPaths.getPlaces, authenticateUserToken, getPlacesCB);
 
 export default userRouter

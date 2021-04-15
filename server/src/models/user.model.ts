@@ -15,7 +15,7 @@ interface IUserKeys{
   email: string;
   password: string;
   isAdmin?: boolean;
-  places?: ID | IPlace[];
+  places?: ID[] | IPlace[];
   token?: string;
 };
 

@@ -10,7 +10,8 @@ dotenv.config();
 
 const app = express();
 const PORT: number = process.env.PORT ? parseInt(process.env.PORT): 3001;
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_SERVER}`;
+// const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_SERVER}`;
+const uri = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_OLD_SEVER}`;
 
 app.use(bodyParser.json());
 app.use(cookieParser());
