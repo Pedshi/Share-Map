@@ -2,6 +2,7 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
 import connect from './connect';
 import errorMiddleware from './middlewares/error.middleware';
 import userRouter from './routes/user.route';
@@ -13,6 +14,7 @@ const PORT: number = process.env.PORT ? parseInt(process.env.PORT): 3001;
 // const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_SERVER}`;
 const uri = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_OLD_SEVER}`;
 
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(cookieParser());
 
