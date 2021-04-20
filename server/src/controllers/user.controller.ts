@@ -3,11 +3,6 @@ import { CreateQuery, Types } from 'mongoose';
 import express from 'express';
 import { IPlace } from '../models/place.model';
 
-async function getUsers(): Promise<IUser[]> {
-  return User.find().exec()
-    .then( (data: IUser[]) => { return data; })
-    .catch( error => { throw error; });
-};
 
 async function createUser( request: express.Request ): Promise<IUser> {
   const user = new User(request.body);
@@ -42,7 +37,6 @@ async function getPlaces(id: string): Promise<Types.ObjectId[] | IPlace[] | unde
 };
 
 export default {
-  getUsers,
   createUser,
   login,
   addPlace,
