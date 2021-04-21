@@ -40,15 +40,12 @@ const loginCB = async (req: Request, res: Response, next: NextFunction) => {
 userRouter.post(UserPaths.login, loginCB);
 
 const authenticateTokenCB = async (req: Request<authMiddlewareParams>, res: Response, next: NextFunction) => {
-  const {email} = req.body;
-  if( !email || email == '')
-    next( new Error('Email needed') );
-  if( req.params.user.email == email )
+  if( req.params.user.email )
     return res.sendStatus(200);
   next( new Error('Not authorized') );
 };
 
-userRouter.get(UserPaths.authenticateToken, authenticateUserToken , authenticateTokenCB);
+userRouter.post(UserPaths.authenticateToken, authenticateUserToken , authenticateTokenCB);
 
 interface addPlaceParams extends authMiddlewareParams{
   placeId: string;
