@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const authReducerName = 'authentication';
 
-const LOGIN = authReducerName + '/loginUser'
+const LOGIN = authReducerName + '/loginUser';
 
 const initialState = {
   user: {},
@@ -39,8 +39,7 @@ const authSlice = createSlice({
         state.error = payload.error.message;
         state.status = 'rejected';
       })
-
   }
-})
+});
 
 export default authSlice.reducer;

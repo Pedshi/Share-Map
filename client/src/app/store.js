@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authenticationReducer from '../features/login/authSlice';
+import placeReducer from '../features/place/placeSlice';
 
 const store = configureStore({
   reducer: {
-    authentication: authenticationReducer
+    authentication: authenticationReducer,
+    place: placeReducer
   }
 });
 

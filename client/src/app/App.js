@@ -6,12 +6,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="wrapper">
-        <Switch>
-          <Route path={'/place/create'} exact component={PlaceScreen}/>
-          <Route path={'/'} component={LoginScreen}/>
-        </Switch>
-      </div>
+      <Switch>
+        <Route path={'/place/create'} exact component={PlaceScreen}/>
+        <Route path={'/'} component={LoginScreen}/>
+      </Switch>
     </BrowserRouter>
   );
 }

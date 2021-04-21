@@ -41,6 +41,12 @@ input[type=submit]{
   justify-content: center;
 }
 
+.wrapper-admin{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
 .form-container{
   margin: auto;
   background-color: #499DD0;
@@ -71,4 +77,19 @@ input[type=submit]{
 @keyframes spin {
   0%  { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.input-txt-with-label{
+  display: flex;
+  flex-direction: column;
+}
+
+.input-txt-with-label label{
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding-left: 4px;
+}
+
+.input-txt-with-label input {
+  width: 300px;
 }
