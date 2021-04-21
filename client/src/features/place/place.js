@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { authReducerName, authenticateUser } from '../login/authSlice';
+
 import  InputWLabel, { renderStatusEffect } from '../../common/inputWLabel';
 import { createPlace, placeReducerName } from './placeSlice';
-import { Redirect } from 'react-router-dom';
+
 
 const categoryOptions = [
   {label: "Bar",        value: 1},
@@ -13,6 +13,8 @@ const categoryOptions = [
 ];
 
 function Place() {
+
+  const { status, place } = useSelector(state => state[placeReducerName]);  
 
   const [placeName, setPlaceName] = useState('');
   const [address, setAddress] = useState('');
@@ -29,14 +31,7 @@ function Place() {
     sat: '',
     sun: ''
   });
-  const { authenticated } = useSelector(state => state[authReducerName]);
-  const { status, place } = useSelector(state => state[placeReducerName]);
   const dispatch = useDispatch();
-
-  useEffect( () => {
-    if (!authenticated)
-      dispatch(authenticateUser());
-  },[]);
 
   const updateOpeningHours = (name) => (value) => {
     setOpeningHours({
@@ -61,9 +56,6 @@ function Place() {
 
   return (
     <div className="wrapper-admin">
-      {!authenticated && (
-          <Redirect to="/"/>
-      )}
       <div className="form-container">
         <form onSubmit={onSubmitHandler}>
           <InputWLabel labelText="Name of Place" value={placeName}  onValueChange={setPlaceName}/>

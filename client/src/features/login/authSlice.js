@@ -3,29 +3,18 @@ import axios from 'axios';
 
 export const authReducerName = 'authentication';
 
-const LOGIN = authReducerName + '/loginUser';
 const AUTHENTICATE_USER = authReducerName + '/authenticateUser';
 
 const initialState = {
   user: {},
-  status: 'idle',
+  status: 'loading',
   authenticated: false,
   error: null
 };
 
-export const loginUser = createAsyncThunk(
-  LOGIN,
-  async (user) => {
-    try{
-      await axios.post('/api/user/login', user);
-      return {};
-    }catch(error){ throw error }
-  }
-);
-
 export const authenticateUser = createAsyncThunk(
   AUTHENTICATE_USER,
-  async (user) => {
+  async () => {
     try{
       await axios.post('/api/user/auth');
       return {};
@@ -33,23 +22,14 @@ export const authenticateUser = createAsyncThunk(
   }
 );
 
-const isActionPending = (action) => {
-  return action.meta && action.meta.requestStatus === 'pending';
-};
-
 const authSlice = createSlice({
   name: authReducerName,
   initialState,
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(loginUser.fulfilled, (state) => {
-        state.authenticated = true;
-        state.status = 'idle';
-      })
-      .addCase(loginUser.rejected, (state, { error }) => {
-        state.error = error.message;
-        state.status = 'rejected';
+      .addCase(authenticateUser.pending, (state) => {
+        state.status = 'loading';
       })
       .addCase(authenticateUser.fulfilled, (state) => {
         state.authenticated = true;
@@ -58,9 +38,6 @@ const authSlice = createSlice({
       .addCase(authenticateUser.rejected, (state) => {
         state.authenticated = false;
         state.status = 'idle';
-      })
-      .addMatcher(isActionPending, (state) => {
-        state.status = 'loading';
       })
   }
 });
