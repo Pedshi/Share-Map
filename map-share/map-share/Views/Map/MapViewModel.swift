@@ -76,13 +76,17 @@ extension MapViewModel {
     static func whenLoading() -> Feedback<State, Event> {
         Feedback { (state: State) -> AnyPublisher<Event, Never>  in
             guard case .loading = state else { return Empty().eraseToAnyPublisher() }
-            
-            return API.Place.fetchPlaces()
-                .decode(type: [Place].self, decoder: JSONDecoder())
-                .receive(on: DispatchQueue.main)
-                .map(Event.onLoadingSuccess)
-                .catch{ Just(Event.onLoadingFailed($0)) }
-                .eraseToAnyPublisher()
+            do{
+                let user = try KeyChainManager.Token.readItem()
+                return API.Place.fetchPlaces(token: user.secretValue)
+                    .decode(type: [Place].self, decoder: JSONDecoder())
+                    .receive(on: DispatchQueue.main)
+                    .map(Event.onLoadingSuccess)
+                    .catch{ Just(Event.onLoadingFailed($0)) }
+                    .eraseToAnyPublisher()
+            }catch {
+                return Just(Event.onLoadingFailed(error)).eraseToAnyPublisher()
+            }
         }
     }
     

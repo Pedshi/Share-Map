@@ -12,8 +12,8 @@ import MapKit
 
 extension API{
     enum Place {
-        static func fetchPlaces(session: URLSession = .shared) -> AnyPublisher<Data, Error>{
-            let request = Endpoints.fetchPlaces.build(authData: nil, bodyData: nil)!
+        static func fetchPlaces(token: String, session: URLSession = .shared) -> AnyPublisher<Data, Error>{
+            let request = Endpoints.fetchPlaces.build(authData: token, bodyData: nil)!
             return session.dataTaskPublisher(for: request)
                     .validateResponse()
                     .map{ $0.data }
@@ -30,7 +30,7 @@ struct Place : Identifiable, Codable, Equatable {
     var name : String
     var address : String
     var openingHours : [String: String]
-    var category : [Int]
+    var category : Int
     
     var isSelected: Bool = false
     
@@ -47,6 +47,7 @@ struct Place : Identifiable, Codable, Equatable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case id, latitude, longitude, name, address, openingHours, category
+        case latitude, longitude, name, address, openingHours, category
+        case id = "_id"
     }
 }

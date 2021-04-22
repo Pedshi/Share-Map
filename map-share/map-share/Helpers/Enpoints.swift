@@ -27,7 +27,7 @@ struct Endpoints<Kind: TypeOfRequest, Method: MethodForRequest> {
 
     func build(authData: Kind.RequestData, bodyData: Method.BodyData) -> URLRequest? {
         var component = base
-        component.path = "/api/" + path
+        component.path = "/api" + path
         component.queryItems = queryItems
         
         guard let url = component.url else { return nil }
@@ -82,18 +82,18 @@ enum RequestMethod {
 }
 
 
-extension Endpoints where Kind == RequestType.Public,
+extension Endpoints where Kind == RequestType.Private,
                           Method == RequestMethod.Get{
-    static var fetchPlaces = Endpoints(path: "place", queryItems: [])
+    static var fetchPlaces = Endpoints(path: "/user/place", queryItems: [])
 }
 
 extension Endpoints where Kind == RequestType.Public,
                           Method == RequestMethod.Post {
-    static var login = Endpoints(path: "anvandare/loggain", queryItems: [])
-    static var register = Endpoints(path: "anvandare/register", queryItems: [])
+    static var login = Endpoints(path: "/user/login", queryItems: [])
+    static var register = Endpoints(path: "/user/signup", queryItems: [])
 }
 
 extension Endpoints where Kind == RequestType.Private,
                           Method == RequestMethod.Post {
-    static var validateToken = Endpoints(path: "anvandare/token", queryItems: [])
+    static var validateToken = Endpoints(path: "/user/auth", queryItems: [])
 }

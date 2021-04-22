@@ -71,9 +71,8 @@ struct MapWithMarkers: View {
         .ignoresSafeArea()
     }
     
-    func pin(for categories: [Int]) -> String {
-        guard 0 < categories.count else { return "defaultpin" }
-        switch categories[0] {
+    func pin(for category: Int) -> String {
+        switch category {
         case 1:
             return "drinkpin"
         case 2:

@@ -35,7 +35,7 @@ struct RegisterView: View {
                                  Text("Sign in with Apple")
                                      .fontWeight(.semibold)
                                      .padding(.vertical, 20)
-                                     .padding(.horizontal, 90)
+                                     .padding(.horizontal, 75)
                                      .background(Color.black)
                                      .foregroundColor(.white)
                                      .cornerRadius(30)
