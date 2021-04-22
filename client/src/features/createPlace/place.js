@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import  InputWLabel, { renderStatusEffect } from '../../common/inputWLabel';
 import { createPlace, placeReducerName } from './placeSlice';
@@ -57,6 +58,9 @@ function Place() {
   return (
     <div className="wrapper-admin">
       <div className="form-container">
+        <Link to="/place/user">
+          <button>Go To My Places</button>
+        </Link>
         <form onSubmit={onSubmitHandler}>
           <InputWLabel labelText="Name of Place" value={placeName}  onValueChange={setPlaceName}/>
           <br/>

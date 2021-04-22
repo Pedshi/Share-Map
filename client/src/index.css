@@ -93,3 +93,9 @@ input[type=submit]{
 .input-txt-with-label input {
   width: 300px;
 }
+
+.row-baseline{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
