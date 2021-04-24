@@ -19,8 +19,8 @@ struct ProfileView: View {
         switch viewModel.state {
         case .loading:
             spinner
-        case let .idle(places):
-            UserProfileView(places: places)
+        case let .idle(places, email):
+            UserProfileView(places: places, email: email)
         case .loadingFailed:
             loadingFailed
         }
@@ -43,12 +43,13 @@ struct ProfileView: View {
 
 struct UserProfileView: View {
     
-    var places : [Place]
+    var places: [Place]
+    var email: String
     
     var body: some View {
         Form{
             Section(header: Text("E-mail")){
-                Text("Pedram.shir@hotmail.com")
+                Text(email)
             }
             
             Section(header: Text("Saved Places")){

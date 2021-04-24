@@ -41,13 +41,13 @@ class ProfileViewModel: ObservableObject {
 extension ProfileViewModel{
     enum State {
         case loading
-        case idle([Place])
+        case idle([Place], String)
         case loadingFailed
     }
     
     enum Event {
         case onLoading
-        case onLoadingSuccess([Place])
+        case onLoadingSuccess([Place], String)
         case onLoadingFailed(Error)
     }
     
@@ -64,8 +64,8 @@ extension ProfileViewModel{
     
     static func reduceLoading(state: State, event: Event) -> State {
         switch event {
-        case let .onLoadingSuccess(placeList):
-            return .idle(placeList)
+        case let .onLoadingSuccess(placeList, email):
+            return .idle(placeList, email)
         case .onLoadingFailed:
             return .loadingFailed
         default:
@@ -81,7 +81,7 @@ extension ProfileViewModel{
                 return API.Place.fetchPlaces(token: user.secretValue)
                     .decode(type: [Place].self, decoder: JSONDecoder())
                     .receive(on: DispatchQueue.main)
-                    .map(Event.onLoadingSuccess)
+                    .map{ places in Event.onLoadingSuccess(places, user.account) }
                     .catch{ Just(Event.onLoadingFailed($0)) }
                     .eraseToAnyPublisher()
             }catch {

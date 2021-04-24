@@ -81,9 +81,6 @@ extension LoginViewModel {
 
 extension LoginViewModel {
     static func reduce(_ state: State, _ event: Event) -> State {
-        print("current State : \(state)")
-        print("current Event : \(event)")
-        print("-------------------------------------")
         switch state {
         case .authenticating:
             return reduceAuthenticating(state: state, event: event)
