@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C10691F0263488D6009CB43E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10691EF263488D6009CB43E /* ProfileView.swift */; };
+		C10691F626349019009CB43E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10691F526349019009CB43E /* ProfileViewModel.swift */; };
 		C10835D9260B39BF002E7B14 /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10835D8260B39BF002E7B14 /* IntegrationTests.swift */; };
 		C1158F6826037E56006AAE85 /* MockReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1158F6726037E56006AAE85 /* MockReponse.swift */; };
 		C132A2EF25FA4BB40064AB36 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = C132A2EE25FA4BB40064AB36 /* Feedback.swift */; };
@@ -69,6 +71,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C10691EF263488D6009CB43E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		C10691F526349019009CB43E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		C10835D8260B39BF002E7B14 /* IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
 		C1158F6726037E56006AAE85 /* MockReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockReponse.swift; sourceTree = "<group>"; };
 		C132A2EE25FA4BB40064AB36 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
@@ -144,6 +148,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C10691EE263488B1009CB43E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				C10691EF263488D6009CB43E /* ProfileView.swift */,
+				C10691F526349019009CB43E /* ProfileViewModel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		C1158F6626037E43006AAE85 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,6 +348,7 @@
 		C1A32A2725F7F7CD00226172 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C10691EE263488B1009CB43E /* Profile */,
 				C145BDB32603B5E600CBFAAA /* Map */,
 				C132A2E025FA47070064AB36 /* Home */,
 				C132A2DF25FA47010064AB36 /* Login */,
@@ -482,6 +496,7 @@
 				C132A2EF25FA4BB40064AB36 /* Feedback.swift in Sources */,
 				C1F600F226126CB800FBE0E3 /* Date+Get.swift in Sources */,
 				C1A329C725F6589D00226172 /* LoginView.swift in Sources */,
+				C10691F0263488D6009CB43E /* ProfileView.swift in Sources */,
 				C1A32A3225F7FAD700226172 /* HomeViewModel.swift in Sources */,
 				C1785B2A260A2C140051AF12 /* KeyChain.swift in Sources */,
 				C1DA0BC3261CA27E00097EE2 /* RegisterView.swift in Sources */,
@@ -494,6 +509,7 @@
 				C1DB480C261320D400D1455F /* LocationManager.swift in Sources */,
 				C1A329C525F6589D00226172 /* map_shareApp.swift in Sources */,
 				C1A32A2925F7F80C00226172 /* HomeView.swift in Sources */,
+				C10691F626349019009CB43E /* ProfileViewModel.swift in Sources */,
 				C1A329FB25F65F7200226172 /* LoginViewModel.swift in Sources */,
 				C1A32A2025F7A3A000226172 /* UserRequest.swift in Sources */,
 				C15D1E5325FA6D14006304D5 /* View+AnyView.swift in Sources */,

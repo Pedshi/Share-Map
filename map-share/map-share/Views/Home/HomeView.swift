@@ -36,7 +36,7 @@ struct HomeView: View {
         TabView{
             MapView(viewModel: MapViewModel())
                 .tabItem { Label(homeTab, systemImage: "map") }
-            Text("Second")
+            ProfileView(viewModel: ProfileViewModel())
                 .tabItem { Label(profileTab, systemImage: "person.crop.circle") }
         }
     }
