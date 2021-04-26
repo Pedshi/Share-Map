@@ -12,7 +12,7 @@ import MapKit
 
 extension API{
     enum Place {
-        static func fetchPlaces(token: String, session: URLSession = .shared) -> AnyPublisher<Data, Error>{
+        static func fetchPlacesRequest(token: String, session: URLSession = .shared) -> AnyPublisher<Data, Error>{
             let request = Endpoints.fetchPlaces.build(authData: token, bodyData: nil)!
             return session.dataTaskPublisher(for: request)
                     .validateResponse()

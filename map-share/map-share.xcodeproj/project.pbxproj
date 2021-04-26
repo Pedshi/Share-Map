@@ -11,6 +11,7 @@
 		C10691F626349019009CB43E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10691F526349019009CB43E /* ProfileViewModel.swift */; };
 		C10835D9260B39BF002E7B14 /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10835D8260B39BF002E7B14 /* IntegrationTests.swift */; };
 		C1158F6826037E56006AAE85 /* MockReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1158F6726037E56006AAE85 /* MockReponse.swift */; };
+		C12B51582636E9DF001993AB /* map_shareUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12B51572636E9DF001993AB /* map_shareUITests.swift */; };
 		C132A2EF25FA4BB40064AB36 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = C132A2EE25FA4BB40064AB36 /* Feedback.swift */; };
 		C132A2F425FA4BBD0064AB36 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = C132A2F325FA4BBD0064AB36 /* System.swift */; };
 		C13E7C3026150AE400E68012 /* Handlebars.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13E7C2F26150AE400E68012 /* Handlebars.swift */; };
@@ -33,7 +34,6 @@
 		C1A329CC25F658A000226172 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1A329CB25F658A000226172 /* Preview Assets.xcassets */; };
 		C1A329CE25F658A000226172 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A329CD25F658A000226172 /* Persistence.swift */; };
 		C1A329D125F658A000226172 /* map_share.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1A329CF25F658A000226172 /* map_share.xcdatamodeld */; };
-		C1A329E725F658A000226172 /* map_shareUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A329E625F658A000226172 /* map_shareUITests.swift */; };
 		C1A329FB25F65F7200226172 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A329FA25F65F7200226172 /* LoginViewModel.swift */; };
 		C1A32A1725F7895300226172 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A32A1625F7895200226172 /* KeyChainManager.swift */; };
 		C1A32A2025F7A3A000226172 /* UserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A32A1F25F7A3A000226172 /* UserRequest.swift */; };
@@ -73,6 +73,7 @@
 		C10691F526349019009CB43E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		C10835D8260B39BF002E7B14 /* IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
 		C1158F6726037E56006AAE85 /* MockReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockReponse.swift; sourceTree = "<group>"; };
+		C12B51572636E9DF001993AB /* map_shareUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = map_shareUITests.swift; sourceTree = "<group>"; };
 		C132A2EE25FA4BB40064AB36 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		C132A2F325FA4BBD0064AB36 /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 		C13E7C2F26150AE400E68012 /* Handlebars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handlebars.swift; sourceTree = "<group>"; };
@@ -100,7 +101,6 @@
 		C1A329D725F658A000226172 /* map-shareTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "map-shareTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1A329DD25F658A000226172 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1A329E225F658A000226172 /* map-shareUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "map-shareUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C1A329E625F658A000226172 /* map_shareUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = map_shareUITests.swift; sourceTree = "<group>"; };
 		C1A329E825F658A000226172 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1A329FA25F65F7200226172 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C1A32A1625F7895200226172 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
@@ -245,6 +245,7 @@
 			children = (
 				C17D74B626233B7300A019EF /* Button.swift */,
 				C17D74BB26233BF100A019EF /* InputField.swift */,
+				C1F600EC261262D500FBE0E3 /* StyleSheet.swift */,
 			);
 			path = "Design System";
 			sourceTree = "<group>";
@@ -311,8 +312,8 @@
 		C1A329E525F658A000226172 /* map-shareUITests */ = {
 			isa = PBXGroup;
 			children = (
-				C1A329E625F658A000226172 /* map_shareUITests.swift */,
 				C1A329E825F658A000226172 /* Info.plist */,
+				C12B51572636E9DF001993AB /* map_shareUITests.swift */,
 			);
 			path = "map-shareUITests";
 			sourceTree = "<group>";
@@ -324,7 +325,6 @@
 				C13E7C2E26150AAD00E68012 /* ViewComponents */,
 				C1785B28260A2B3C0051AF12 /* KeyChain */,
 				C145BDAE2603ABDD00CBFAAA /* Enpoints.swift */,
-				C1F600EC261262D500FBE0E3 /* StyleSheet.swift */,
 				C1DB480B261320D400D1455F /* LocationManager.swift */,
 			);
 			path = Helpers;
@@ -424,6 +424,7 @@
 					};
 					C1A329E125F658A000226172 = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
 						TestTargetID = C1A329C025F6589D00226172;
 					};
 				};
@@ -532,7 +533,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1A329E725F658A000226172 /* map_shareUITests.swift in Sources */,
+				C12B51582636E9DF001993AB /* map_shareUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -760,6 +761,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "map-shareUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -769,6 +771,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pedshi.map-shareUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "map-share";
@@ -779,6 +782,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "map-shareUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -126,9 +126,8 @@ struct LoginForm: View{
     func signInForm(size: CGSize) -> some View {
         VStack(spacing: Space.times3.rawValue){
             TextField(emailText, text: $email)
-                .accessibility(identifier: "loginEmailField")
+            
             SecureField(pswrdText, text: $password)
-                .accessibility(identifier: "loginPasswordField")
 
             Button(action: {
                 viewModel.send(event: .onLoginReq(

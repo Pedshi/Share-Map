@@ -78,7 +78,7 @@ extension MapViewModel {
             guard case .loading = state else { return Empty().eraseToAnyPublisher() }
             do{
                 let user = try KeyChainManager.Token.readItem()
-                return API.Place.fetchPlaces(token: user.secretValue)
+                return API.Place.fetchPlacesRequest(token: user.secretValue)
                     .decode(type: [Place].self, decoder: JSONDecoder())
                     .receive(on: DispatchQueue.main)
                     .map(Event.onLoadingSuccess)

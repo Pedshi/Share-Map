@@ -45,8 +45,8 @@ struct HomeView: View {
         ProgressView()
     }
     
-    let homeTab = "Hem"
-    let profileTab = "Profil"
+    let homeTab = "Home"
+    let profileTab = "Profile"
 
 }
 
