@@ -22,7 +22,6 @@ input{
   border: none;
   width: 184px;
   margin-bottom: 8px;
-  outline: none;
 }
 
 input[type=submit]{

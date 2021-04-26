@@ -20,7 +20,6 @@ enum RadiusSize: CGFloat {
 }
 
 struct TokenColor {
-    let backgroundDefault: Color
     
     let buttonText: Color
     let linkText: Color
@@ -28,7 +27,6 @@ struct TokenColor {
     let buttonPrimary: Color
     
     init(){
-        backgroundDefault = Color("bg-color")
         buttonText = .white
         linkText = Color("primary-color")
         buttonPrimary = Color("primary-color")

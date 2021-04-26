@@ -10,7 +10,7 @@ import XCTest
 
 class EndPointsTests: XCTestCase {
     
-    var testUrl = try! XCTUnwrap(URL(string: "http://localhost:3001/api/anvandare/loggain?"))
+    var testUrl = try! XCTUnwrap(URL(string: "http://localhost:3001/api/user/login?"))
     var testRequest : URLRequest!
     
     override func setUpWithError() throws {
@@ -55,11 +55,11 @@ class EndPointsTests: XCTestCase {
     }
     
     func test_withQueryItem_shouldSucceed() throws {
-        let correctUrl = try XCTUnwrap(URL(string: "http://localhost:3001/api/anvandare/loggain?user=tstUser"))
+        let correctUrl = try XCTUnwrap(URL(string: "http://localhost:3001/api/user/login?user=tstUser"))
         let queryItems = [
             URLQueryItem(name: "user", value: "tstUser")
         ]
-        let newEndpoint = Endpoints<RequestType.Public, RequestMethod.Get>(path: "anvandare/loggain", queryItems: queryItems)
+        let newEndpoint = Endpoints<RequestType.Public, RequestMethod.Get>(path: "/user/login", queryItems: queryItems)
         let request = try XCTUnwrap(newEndpoint.build(authData: nil, bodyData: nil))
         XCTAssertEqual(request.url, correctUrl)
         XCTAssertEqual(request.cachePolicy, .reloadIgnoringCacheData)
@@ -67,7 +67,7 @@ class EndPointsTests: XCTestCase {
     
     func test_privateEndpoint_shouldSucceed() throws {
         let token = "token"
-        let newEndpoint = Endpoints<RequestType.Private, RequestMethod.Get>(path: "anvandare/loggain", queryItems: [])
+        let newEndpoint = Endpoints<RequestType.Private, RequestMethod.Get>(path: "/user/login", queryItems: [])
         let request = try XCTUnwrap(newEndpoint.build(authData: token, bodyData: nil))
         XCTAssertEqual(request.value(forHTTPHeaderField: "Cookie"), "_t="+token)
     }

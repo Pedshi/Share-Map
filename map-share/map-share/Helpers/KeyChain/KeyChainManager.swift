@@ -87,7 +87,6 @@ struct KeyChainManager : KeyChainManagerProtocol{
             
             guard status == noErr else { throw KeychainError.unhandledError }
         }catch {
-            // TODO: Update view on Exception
             throw error
         }
     }

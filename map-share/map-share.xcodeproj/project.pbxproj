@@ -15,7 +15,6 @@
 		C132A2F425FA4BBD0064AB36 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = C132A2F325FA4BBD0064AB36 /* System.swift */; };
 		C13E7C3026150AE400E68012 /* Handlebars.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13E7C2F26150AE400E68012 /* Handlebars.swift */; };
 		C145674F2601EA6E00942D45 /* UserRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C145674E2601EA6E00942D45 /* UserRequestTests.swift */; };
-		C14567592602110D00942D45 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14567582602110D00942D45 /* LoginViewModelTests.swift */; };
 		C145BDAF2603ABDD00CBFAAA /* Enpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C145BDAE2603ABDD00CBFAAA /* Enpoints.swift */; };
 		C145BDB52603B60700CBFAAA /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C145BDB42603B60700CBFAAA /* MapViewModel.swift */; };
 		C145BDC02603B62400CBFAAA /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C145BDBF2603B62400CBFAAA /* MapView.swift */; };
@@ -34,7 +33,6 @@
 		C1A329CC25F658A000226172 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1A329CB25F658A000226172 /* Preview Assets.xcassets */; };
 		C1A329CE25F658A000226172 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A329CD25F658A000226172 /* Persistence.swift */; };
 		C1A329D125F658A000226172 /* map_share.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1A329CF25F658A000226172 /* map_share.xcdatamodeld */; };
-		C1A329DC25F658A000226172 /* map_shareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A329DB25F658A000226172 /* map_shareTests.swift */; };
 		C1A329E725F658A000226172 /* map_shareUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A329E625F658A000226172 /* map_shareUITests.swift */; };
 		C1A329FB25F65F7200226172 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A329FA25F65F7200226172 /* LoginViewModel.swift */; };
 		C1A32A1725F7895300226172 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A32A1625F7895200226172 /* KeyChainManager.swift */; };
@@ -79,7 +77,6 @@
 		C132A2F325FA4BBD0064AB36 /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 		C13E7C2F26150AE400E68012 /* Handlebars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handlebars.swift; sourceTree = "<group>"; };
 		C145674E2601EA6E00942D45 /* UserRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestTests.swift; sourceTree = "<group>"; };
-		C14567582602110D00942D45 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		C145BDAE2603ABDD00CBFAAA /* Enpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enpoints.swift; sourceTree = "<group>"; };
 		C145BDB42603B60700CBFAAA /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		C145BDBF2603B62400CBFAAA /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -101,7 +98,6 @@
 		C1A329D025F658A000226172 /* map_share.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = map_share.xcdatamodel; sourceTree = "<group>"; };
 		C1A329D225F658A000226172 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1A329D725F658A000226172 /* map-shareTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "map-shareTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C1A329DB25F658A000226172 /* map_shareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = map_shareTests.swift; sourceTree = "<group>"; };
 		C1A329DD25F658A000226172 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1A329E225F658A000226172 /* map-shareUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "map-shareUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1A329E625F658A000226172 /* map_shareUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = map_shareUITests.swift; sourceTree = "<group>"; };
@@ -304,10 +300,8 @@
 			children = (
 				C1785B1A2609F6D00051AF12 /* ApiTest */,
 				C1158F6626037E43006AAE85 /* Mock */,
-				C1A329DB25F658A000226172 /* map_shareTests.swift */,
 				C1A329DD25F658A000226172 /* Info.plist */,
 				C1D9E9DD2601427C00CF6C8D /* KeyChainManagerTests.swift */,
-				C14567582602110D00942D45 /* LoginViewModelTests.swift */,
 				C1FB6D9A2608E4B4001CD9B5 /* EndpointsTests.swift */,
 				C1DB4806261308B700D1455F /* ExtensionTests.swift */,
 			);
@@ -522,14 +516,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C14567592602110D00942D45 /* LoginViewModelTests.swift in Sources */,
 				C174484A260344F9005AD809 /* MockSession.swift in Sources */,
 				C10835D9260B39BF002E7B14 /* IntegrationTests.swift in Sources */,
 				C1158F6826037E56006AAE85 /* MockReponse.swift in Sources */,
 				C1581723260A3CA9003C7822 /* MockKeyChain.swift in Sources */,
 				C1785B1C2609F6EC0051AF12 /* PlaceRequestTests.swift in Sources */,
 				C1FB6D9B2608E4B4001CD9B5 /* EndpointsTests.swift in Sources */,
-				C1A329DC25F658A000226172 /* map_shareTests.swift in Sources */,
 				C1D9E9DE2601427C00CF6C8D /* KeyChainManagerTests.swift in Sources */,
 				C1DB4807261308B700D1455F /* ExtensionTests.swift in Sources */,
 				C145674F2601EA6E00942D45 /* UserRequestTests.swift in Sources */,

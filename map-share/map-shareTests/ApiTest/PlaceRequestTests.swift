@@ -11,6 +11,7 @@ import Combine
 
 class PlaceRequestTests: XCTestCase {
     
+    let testToken = "testToken"
     var session : URLSession!
     
     override func setUpWithError() throws {
@@ -22,7 +23,7 @@ class PlaceRequestTests: XCTestCase {
     func test_placeFetch_shouldSucceed () throws {
         MockSession.response = try MockResponse.mock()
         XCTAssertNoThrow(
-            try await(API.Place.fetchPlaces(session: session))
+            try await(API.Place.fetchPlaces(token: testToken, session: session))
         )
     }
     
@@ -32,7 +33,7 @@ class PlaceRequestTests: XCTestCase {
         ]
         let json = try JSONSerialization.data(withJSONObject: input, options: [])
         MockSession.response = try MockResponse.mock(data: json)
-        let response = try await(API.Place.fetchPlaces(session: session))
+        let response = try await(API.Place.fetchPlaces(token: testToken, session: session))
         let result = try JSONSerialization.jsonObject(with: response, options: []) as? [String: String]
         let resultName = try XCTUnwrap(result)["name"]
         XCTAssertEqual(resultName, input["name"])

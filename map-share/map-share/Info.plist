@@ -39,7 +39,7 @@
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIColorName</key>
-		<string>LaunchScreen-Background</string>
+		<string>bg-color</string>
 	</dict>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
