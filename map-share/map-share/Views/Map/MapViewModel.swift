@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class MapViewModel: ObservableObject {
-    @Published var state : State = .loading
+    @Published var state : State = .loadingPlaces
 
     private var bag = Set<AnyCancellable>()
     
@@ -21,7 +21,7 @@ class MapViewModel: ObservableObject {
             reduce: Self.reduce,
             scheduler: RunLoop.main,
             feedbacks: [
-                Self.whenLoading(),
+                Self.whenLoadingPlaces(),
                 Self.input(input: input.eraseToAnyPublisher())
             ]
         )
@@ -40,20 +40,19 @@ class MapViewModel: ObservableObject {
 
 extension MapViewModel {
     enum State {
-        case loading
+        case loadingPlaces
         case idle([Place])
         case loadingFailed
     }
     
     enum Event {
-        case onLoading
         case onLoadingSuccess([Place])
         case onLoadingFailed(Error)
     }
     
     static func reduce(state: State, event: Event) -> State {
         switch state {
-        case .loading:
+        case .loadingPlaces:
             return reduceLoading(state: state, event: event)
         case .idle:
             return state
@@ -68,14 +67,12 @@ extension MapViewModel {
             return .idle(placeList)
         case .onLoadingFailed:
             return .loadingFailed
-        default:
-            return state
         }
     }
     
-    static func whenLoading() -> Feedback<State, Event> {
+    static func whenLoadingPlaces() -> Feedback<State, Event> {
         Feedback { (state: State) -> AnyPublisher<Event, Never>  in
-            guard case .loading = state else { return Empty().eraseToAnyPublisher() }
+            guard case .loadingPlaces = state else { return Empty().eraseToAnyPublisher() }
             do{
                 let user = try KeyChainManager.Token.readItem()
                 return API.Place.fetchPlacesRequest(token: user.secretValue)

@@ -20,7 +20,7 @@ struct Endpoints<Kind: TypeOfRequest, Method: MethodForRequest> {
             component.port = 3001
         #else
             component.scheme = "https"
-            component.host = "salty-chamber-16325.herokuapp.com"
+            component.host = "ancient-meadow-34265.herokuapp.com"
         #endif
         return component
     }

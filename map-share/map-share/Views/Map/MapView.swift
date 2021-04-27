@@ -18,7 +18,7 @@ struct MapView: View {
     @ViewBuilder
     func content() -> some View{
         switch viewModel.state {
-        case .loading:
+        case .loadingPlaces:
             spinner
         case let .idle(places):
             MapWithMarkers(markers: places)

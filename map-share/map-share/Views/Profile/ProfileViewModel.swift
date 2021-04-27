@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class ProfileViewModel: ObservableObject {
-    @Published var state : State = .loading
+    @Published var state : State = .loadingProfile
 
     private var bag = Set<AnyCancellable>()
     
@@ -21,7 +21,7 @@ class ProfileViewModel: ObservableObject {
             reduce: Self.reduce,
             scheduler: RunLoop.main,
             feedbacks: [
-                Self.whenLoadingPlaces(),
+                Self.whenLoadingProfile(),
                 Self.input(input: input.eraseToAnyPublisher())
             ]
         )
@@ -40,20 +40,19 @@ class ProfileViewModel: ObservableObject {
 
 extension ProfileViewModel{
     enum State {
-        case loading
+        case loadingProfile
         case idle([Place], String)
         case loadingFailed
     }
     
     enum Event {
-        case onLoading
         case onLoadingSuccess([Place], String)
         case onLoadingFailed(Error)
     }
     
     static func reduce(state: State, event: Event) -> State {
         switch state {
-        case .loading:
+        case .loadingProfile:
             return reduceLoading(state: state, event: event)
         case .idle:
             return state
@@ -68,14 +67,12 @@ extension ProfileViewModel{
             return .idle(placeList, email)
         case .onLoadingFailed:
             return .loadingFailed
-        default:
-            return state
         }
     }
     
-    static func whenLoadingPlaces() -> Feedback<State, Event> {
+    static func whenLoadingProfile() -> Feedback<State, Event> {
         Feedback { (state: State) -> AnyPublisher<Event, Never>  in
-            guard case .loading = state else { return Empty().eraseToAnyPublisher() }
+            guard case .loadingProfile = state else { return Empty().eraseToAnyPublisher() }
             do{
                 let user = try KeyChainManager.Token.readItem()
                 return API.Place.fetchPlacesRequest(token: user.secretValue)

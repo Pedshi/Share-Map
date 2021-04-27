@@ -11,16 +11,18 @@ struct ProfileView: View {
     @ObservedObject var viewModel: ProfileViewModel
     
     var body: some View {
-        content()
+        GeometryReader{ geometry in
+            content()
+        }
     }
     
     @ViewBuilder
     func content() -> some View{
         switch viewModel.state {
-        case .loading:
+        case .loadingProfile:
             spinner
         case let .idle(places, email):
-            UserProfileView(places: places, email: email)
+           UserProfileView(places: places, email: email)
         case .loadingFailed:
             loadingFailed
         }
@@ -43,8 +45,8 @@ struct ProfileView: View {
 
 struct UserProfileView: View {
     
-    var places: [Place]
-    var email: String
+    var places = [Place]()
+    var email = ""
     
     var body: some View {
         Form{
