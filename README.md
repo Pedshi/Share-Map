@@ -5,17 +5,17 @@ There also exists a server (Node/TS/Express/MongoDB) and a client (React) hosted
 
 ### Register
 <p align="center">
-  <img src="https://github.com/Pedshi/Share-Map/blob/master/register.gif" alt="Register Demo"/> 
+  <img src="https://github.com/Pedshi/Share-Map/blob/main/register.gif" alt="Register Demo"/> 
 </p>
 
 ### Login
 <p align="center">
-  <img src="https://github.com/Pedshi/Share-Map/blob/master/login.gif" alt="Login Demo"/> 
+  <img src="https://github.com/Pedshi/Share-Map/blob/main/login.gif" alt="Login Demo"/> 
 </p>
 
 ### Map
 <p align="center">
-  <img src="https://github.com/Pedshi/Share-Map/blob/master/map.gif" alt="Map View Demo"/>
+  <img src="https://github.com/Pedshi/Share-Map/blob/main/map.gif" alt="Map View Demo"/>
 </p>
 
 ---
@@ -25,7 +25,7 @@ There also exists a server (Node/TS/Express/MongoDB) and a client (React) hosted
 - Unidirectional data flow using finite-state machine model with [CombineFeedback](https://github.com/sergdort/CombineFeedback). A graph of the states, events and transitions for the Login view is depicted below. 
 
 <p align="center">
-  <img src="https://github.com/Pedshi/Share-Map/blob/master/login_fsm.png?raw=true" alt="State graph for login"/>
+  <img src="https://github.com/Pedshi/Share-Map/blob/main/login_fsm.png?raw=true" alt="State graph for login"/>
 </p>
 
 There exists no global state for the whole app, instead each 'View - View Model' pair has its own state management.
