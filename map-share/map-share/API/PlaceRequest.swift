@@ -31,6 +31,7 @@ struct Place : Identifiable, Codable, Equatable {
     var address : String
     var openingHours : [String: String]
     var category : Int
+    var igLocationUrl: String
     
     var isSelected: Bool = false
     
@@ -47,7 +48,7 @@ struct Place : Identifiable, Codable, Equatable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case latitude, longitude, name, address, openingHours, category
+        case latitude, longitude, name, address, openingHours, category, igLocationUrl
         case id = "_id"
     }
 }

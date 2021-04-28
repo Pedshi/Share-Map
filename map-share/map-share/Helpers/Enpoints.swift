@@ -14,14 +14,14 @@ struct Endpoints<Kind: TypeOfRequest, Method: MethodForRequest> {
     
     private var base : URLComponents {
         var component = URLComponents()
-        #if DEBUG
-            component.scheme = "http"
-            component.host = "localhost"
-            component.port = 3001
-        #else
+//        #if DEBUG
+//            component.scheme = "http"
+//            component.host = "localhost"
+//            component.port = 3001
+//        #else
             component.scheme = "https"
             component.host = "ancient-meadow-34265.herokuapp.com"
-        #endif
+//        #endif
         return component
     }
 

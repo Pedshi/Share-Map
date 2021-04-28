@@ -38,6 +38,7 @@ struct HalfModal: View{
                                 .font(.footnote)
                                 .foregroundColor(.secondary)
                             Text( place.openingHours[currentDay] ?? "" )
+                            Link(igLinkText, destination: URL(string: place.igLocationUrl) ?? defaultUrl)
                         }
                         
                         Spacer()
@@ -94,6 +95,8 @@ struct HalfModal: View{
     let minCloseGesture : CGFloat = 40
     let maxHeight : CGFloat = 280
     let minButtonSize: CGFloat = 44
+    let igLinkText = "Go to instagram tag"
+    let defaultUrl: URL = URL(string: "https://www.instagram.com")!
 }
 
 
